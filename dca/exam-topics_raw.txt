@@ -1,0 +1,207 @@
+Regex
+
+^([A-E]\. .*)$
+$1\n
+
+^x([A-E]\. .*)$
+$1
+<!-- class="correct" -->\n
+
+
+1. What is the difference between the ADD and COPY Dockerfile instructions? (Choose two.)
+
+A. ADD supports regular expression handling while COPY does not.
+B. COPY supports compression format handling while ADD does not.
+xC. ADD supports compression format handling while COPY does not.
+D. COPY supports regular expression handling while ADD does not.
+xE. ADD supports remote URL handling while COPY does not.
+
+
+2. When an application being managed by UCP fails, you would like a summary of all requests made to the UCP API in the hours leading up to the failure. What must be configured correctly beforehand for this to be possible?
+
+xA. UCP audit logs must be set to the ‘metadata’ or ‘request’ level.
+B. All engines in the cluster must have their log driver set to the ‘metadata’ or ‘request’ level.
+C. UCP logging levels must be set to the ‘info’ or ‘debug’ level.
+D. Set the logging level in the config object for the ucp-kube-api-server container to warning or higher.
+
+
+3. A user’s attempts to set the system time from inside a Docker container are unsuccessful.\ Could this be blocking this operation. SELinux
+
+xA. Yes
+B. No
+
+
+4. One of several containers in a pod is marked as unhealthy after failing its livenessProbe many times. Is this the action taken by the orchestrator to fix the unhealthy container?
+The unhealthy container is restarted.
+
+xA. Yes
+B. No
+
+
+5. Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate?
+Set INSECURE_REGISTRY in the ‘/etc/docker/default’ configuration file.
+
+A. Yes
+xB. No
+
+
+6. Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate? Set and export the IGNORE_TLS environment variable on the command line.
+
+A. Yes
+xB. No
+
+
+7. Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate? Pass the ‘--insecure registry’ flag to the daemon at run time.
+
+xA. Yes
+B. No
+
+
+8. Is this an advantage of multi-stage builds? better logical separation of Dockerfile instructions for increased readability
+
+xA. Yes
+B. No
+
+
+9. Is this an advantage of multi-stage builds? better caching when building Docker images
+
+A. Yes
+xB. No
+
+
+10. You add a new user to the engineering organization in DTR. Will this action grant them read/write access to the engineering/api repository? Add the user directly to the list of users with read/write access under the repository’s Permissions tab.
+
+xA. Yes
+B. No
+
+
+11. You add a new user to the engineering organization in DTR. Will this action grant them read/write access to the engineering/api repository? Mirror the engineering/api repository to one of the user’s own private repositories.
+
+A. Yes
+xB. No
+
+
+12. You add a new user to the engineering organization in DTR. Will this action grant them read/write access to the engineering/api repository? Add them to a team in the engineering organization that has read/write access to the engineering/api repository.
+
+xA. Yes
+B. No
+
+
+13. Seven managers are in a swarm cluster. Is this how should they be distributed across three datacenters or availability zones? 3-2-2
+
+xA. Yes
+B. No
+
+
+14. Seven managers are in a swarm cluster. Is this how should they be distributed across three datacenters or availability zones? 5-1-1
+
+A. Yes
+xB. No
+
+
+15. Is this a function of UCP? image role-based access control
+
+xA. Yes
+B. No
+
+
+16. Is this a function of UCP? enforces the deployment of signed images to the cluster
+
+xA. Yes
+B. No
+
+
+17. Is this the purpose of Docker Content Trust? Enable mutual TLS between the Docker client and server.
+
+A. Yes
+xB. No
+
+
+18. Is this the purpose of Docker Content Trust? Sign and verify image tags.
+
+xA. Yes
+B. No
+
+
+19. Is this the purpose of Docker Content Trust? Indicate an image on Docker Hub is an official image.
+
+A. Yes
+xB. No
+
+
+20. In the context of a swarm mode cluster, does this describe a node? an instance of the Docker CLI connected to the swarm
+
+A. Yes
+xB. No
+
+
+21. In the context of a swarm mode cluster, does this describe a node? a virtual machine participating in the swarm
+
+xA. Yes
+B. No
+
+
+22. Is this a supported user authentication method for Universal Control Plane? SAML
+
+xA. Yes
+B. No
+
+
+23. Is this a supported user authentication method for Universal Control Plane? X.500
+
+A. Yes
+xB. No
+
+
+24. Is this statement correct? A Dockerfile provides instructions for building a Docker image.
+
+xA. Yes
+B. No
+
+
+25. Is this statement correct? A Dockerfile stores persistent data between deployments of a container.
+
+A. Yes
+xB. No
+
+
+26. Will this command ensure that overlay traffic between service tasks is encrypted? docker network create -d overlay --secure <network-name>
+
+xA. Yes
+B. No
+
+
+27. An application image runs in multiple environments, with each environment using different certificates and ports. Is this a way to provision configuration to containers at runtime? Create a Dockerfile for each environment, specifying ports and Docker secrets for certificates.
+
+A. Yes
+xB. No
+
+
+28. Will this sequence of steps completely delete an image from disk in the Docker Trusted Registry? Delete the image and delete the image repository from Docker Trusted Registry
+
+A. Yes
+xB. No
+
+
+29. Will this sequence of steps completely delete an image from disk in the Docker Trusted Registry? Delete the image and run garbage collection on the Docker Trusted Registry.
+
+xA. Yes
+B. No
+
+
+30. Does this describe the role of Control Groups (cgroups) when used with a Docker container? user authorization to the Docker API
+
+A. Yes
+xB. No
+
+
+31. Does this describe the role of Control Groups (cgroups) when used with a Docker container? role-based access control to clustered resources
+
+A. Yes
+xB. No
+
+
+32. Does this describe the role of Control Groups (cgroups) when used with a Docker container? accounting and limiting of resources
+
+xA. Yes
+B. No

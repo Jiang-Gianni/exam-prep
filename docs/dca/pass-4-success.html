@@ -1,0 +1,171 @@
+<head>
+    <title>Exam Preparation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <style>
+        .hide-until-load {
+            visibility: hidden;
+        }
+    </style>
+
+
+    <script src="file:///home/gianni/Desktop/Git/exam-prep/main.js" defer></script>
+    <link rel="stylesheet" href="file:///home/gianni/Desktop/Git/exam-prep/style.css">
+</head><style>.text-center{text-align:center}.m-8{margin:2rem}.container{width:100%}.bg-purple-900{--bg-opacity:1;background-color:#44337a;background-color:rgba(68,51,122,var(--bg-opacity))}</style>
+<h4 class="text-center m-8">
+<p><a href="https://www.pass4success.com/docker/exam/dca"><strong>Source</strong></a></p>
+</h4>
+<div id="questions-show-answers" class="container hide-until-load">
+<ol>
+<li>The Kubernetes yaml shown below describes a networkPolicy. Will the networkPolicy BLOCK this trafftc? Solution. a request issued from a pod bearing the tier: api label, to a pod bearing the tier: backend label</li>
+</ol>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">network.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">NetworkPolicy</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">dca</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>    <span style="color:#58a1dd">namespace</span>: <span style="color:#a6be9d">default</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>    <span style="color:#58a1dd">podSelector</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>        <span style="color:#58a1dd">matchLabels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span>            <span style="color:#58a1dd">tier</span>: <span style="color:#a6be9d">backend</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>    <span style="color:#58a1dd">ingress</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>    <span style="color:#58a1dd">-from</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>        <span style="color:#58a1dd">-podSelector</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>            <span style="color:#58a1dd">matchLabels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">14</span><span>                <span style="color:#58a1dd">tier</span>: <span style="color:#a6be9d">api</span>
+</span></span></code></pre><p>A. Yes</p>
+<p  class="correct" >B. No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">https://kubernetes.io/docs/concepts/services-networking/network-policies/</a></li>
+</ul>
+<p>The provided Kubernetes NetworkPolicy YAML configuration indicates that the policy applies to pods with the label tier: backend in the default namespace1. The ingress rule allows traffic from pods with the label tier: api1. Therefore, a request issued from a pod bearing the tier: api label to a pod bearing the tier: backend label will not be blocked by this networkPolicy1. This is because the networkPolicy explicitly allows ingress from pods with the tier: api label1. For more information on Kubernetes Network</p>
+</article>
+</details>
+<ol start="2">
+<li>In Docker Trusted Registry, is this how a user can prevent an image, such as 'nginx:latest', from being overwritten by another user with push access to the repository? Solution: Keep a backup copy of the image on another repository.</li>
+</ol>
+<p>A. Yes</p>
+<p  class="correct" >B. No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/62539266/is-there-a-way-to-prevent-overwriting-existing-tags-images-in-azure-container-re">https://stackoverflow.com/questions/62539266/is-there-a-way-to-prevent-overwriting-existing-tags-images-in-azure-container-re</a></li>
+</ul>
+<p>Keeping a backup copy of the image on another repository is not how a user can prevent an image, such as 'nginx:latest', from being overwritten by another user with push access to the repository. This approach does not prevent the original image from being overwritten, it only provides a way to restore it from another source. However, this may not be reliable or efficient, as the backup repository may not be in sync with the original one, or may not be accessible at all times.To prevent an image from being overwritten by another user, the user can use the DTR web UI to make the tag immutable1. This feature allows the user to lock a specific tag, so that no one can push a new image with the same tag to the repository.This ensures that the image is always consistent and secure1.</p>
+</article>
+</details>
+<ol start="3">
+<li>In Docker Trusted Registry, is this how a user can prevent an image, such as 'nginx:latest', from being overwritten by another user with push access to the repository? Solution: Tag the image with 'nginx:immutable'.</li>
+</ol>
+<p>A. Yes</p>
+<p  class="correct" >B. No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/66864753/redirecting-to-docker-registry-with-nginx">https://stackoverflow.com/questions/66864753/redirecting-to-docker-registry-with-nginx</a></li>
+</ul>
+<p>Tagging the image with 'nginx:immutable' isnothow a user can prevent an image, such as 'nginx:latest', from being overwritten by another user with push access to the repository. Tagging the image with 'nginx:immutable' will only create a new tag for the image, but it will not prevent the original tag from being overwritten.To prevent an image tag from being overwritten in Docker Trusted Registry, the user can use the DTR web UI to make the tag immutable1.This will prevent anyone from pushing a new image with the same tag, even if they have push access to the repository1.Alternatively, the user can also use the DTR API to make the tag immutable2.Reference:Prevent tags from being overwritten), DTR API reference)</p>
+</article>
+</details>
+<ol start="4">
+<li>Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate? Solution: Set IGNORE_TLS in the 'daemon.json' configuration file.</li>
+</ol>
+<p>A. Yes</p>
+<p  class="correct" >B. No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority">https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/security/certificates/">https://docs.docker.com/engine/security/certificates/</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/58476218/unable-to-push-to-private-docker-registry-via-tls">https://stackoverflow.com/questions/58476218/unable-to-push-to-private-docker-registry-via-tls</a></p>
+</li>
+<li>
+<p><a href="https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052">https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052</a></p>
+</li>
+</ul>
+<p>This is not a way to configure the Docker engine to use a registry without a trusted TLS certificate. There is no such option as IGNORE_TLS in the daemon.json configuration file.The daemon.json file is used to configure various aspects of the Docker engine, such as logging, storage, networking, and security1.To use a registry without a trusted TLS certificate, you need to either add the certificate to the trusted root certificates of the system, or configure the Docker engine to allow insecure registries2.To add the certificate to the trusted root certificates, you need to copy the certificate file to the /etc/docker/certs.d/<registry-hostname>/ directory on every Docker host2.To configure the Docker engine to allow insecure registries, you need to add the registry hostname or IP address to the ''insecure-registries'' array in the daemon.json file3. For example:</p>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>{ <span style="color:#58a1dd">&#34;insecure-registries&#34;</span> : [<span style="color:#a6be9d">&#34;myregistry.example.com:5000&#34;</span>] }
+</span></span></code></pre><p>Note that using insecure registries is not recommended, as it exposes you to potential man-in-the-middle attacks and data corruption3.You should always use a registry with a trusted TLS certificate, or use Docker Content Trust to sign and verify your images4.</p>
+</article>
+</details>
+<ol start="5">
+<li>You are pulling images from a Docker Trusted Registry installation configured to use self-signed certificates, and this error appears: <code>x509: certificate signed by unknown authority.</code> You already downloaded the Docker Trusted Registry certificate authority certificate from <a href="https://dtr.example.com/ca">https://dtr.example.com/ca</a>. How do you trust it? (Select two.)</li>
+</ol>
+<p>A. Pass '-trust-certificate ca.crt to the Docker client.</p>
+<p>B. Place the certificate in '/etc/docker/dtr/dtr.example.com.crt' and restart the Docker daemon on all cluster nodes.</p>
+<p  class="correct" >C. Place the certificate in /etc/docker/certs.d/dtr.example.com/ca.crt' on all cluster nodes.</p>
+<p>D. Pass -- insecure-registry to the Docker client.</p>
+<p  class="correct" >E. Place the certificate in your OS certificate path, trust the certificate systemwide, and restart the Docker daemon across all cluster nodes.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>To trust a self-signed certificate from a Docker Trusted Registry (DTR), you need to place the certificate in the appropriate location on all cluster nodes and restart the Docker daemon. There are two possible locations for the certificate, depending on your OS and Docker version1:</p>
+<ul>
+<li>
+<p>/etc/docker/certs.d/dtr.example.com/ca.crt: This is the preferred location for Linux systems and Docker versions 1.13 and higher. This directory is scanned by Docker for certificates and keys for each registry domain2.</p>
+</li>
+<li>
+<p>Your OS certificate path: This is the fallback location for other OSes and Docker versions. You need to find the certificate store for your OS and copy the certificate there. You also need to trust the certificate system-wide, which may require additional steps depending on your OS3.</p>
+</li>
+</ul>
+<p>The other options are not correct because:</p>
+<ul>
+<li>
+<p>Passing '-trust-certificate ca.crt to the Docker client is not a valid option. There is no such flag for the Docker client4.</p>
+</li>
+<li>
+<p>Placing the certificate in '/etc/docker/dtr/dtr.example.com.crt' is not a valid location. The certificate should be in the /etc/docker/certs.d directory, not the /etc/docker/dtr directory1.</p>
+</li>
+<li>
+<p>Passing -- insecure-registry to the Docker client is not a recommended option. This flag disables the TLS verification for the registry, which makes the communication insecure and vulnerable to attacks.</p>
+</li>
+<li>
+<p>Use self-signed certificates | Docker Docs</p>
+</li>
+<li>
+<p>Test an insecure registry | Docker Docs</p>
+</li>
+<li>
+<p>Add TLS certificates as a trusted root authority to the host OS | Docker Docs</p>
+</li>
+<li>
+<p>docker | Docker Docs</p>
+</li>
+<li>
+<p>[Deploy a registry server | Docker Docs]</p>
+</li>
+</ul>
+</article>
+</details>
+</div>

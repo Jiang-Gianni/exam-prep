@@ -5,7 +5,7 @@
 </h4>
 
 
-<div id="questions-hide-answers" class="container">
+<div id="questions-hide-answers" class="container hide-until-load">
 
 1. Which command do you use to create a new swarm?
 

@@ -1,0 +1,1119 @@
+<head>
+    <title>Exam Preparation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <style>
+        .hide-until-load {
+            visibility: hidden;
+        }
+    </style>
+
+
+    <script src="file:///home/gianni/Desktop/Git/exam-prep/main.js" defer></script>
+    <link rel="stylesheet" href="file:///home/gianni/Desktop/Git/exam-prep/style.css">
+</head><style>.text-center{text-align:center}.m-8{margin:2rem}.container{width:100%}.bg-purple-900{--bg-opacity:1;background-color:#44337a;background-color:rgba(68,51,122,var(--bg-opacity))}</style>
+<h4 class="text-center m-8">
+<p><a href="https://www.pass4success.com/docker/exam/dca"><strong>Source</strong></a></p>
+</h4>
+<div id="questions-show-answers" class="container hide-until-load">
+<ol>
+<li>How do you initialize a Docker swarm mode cluster as a manager node?</li>
+</ol>
+<p  class="correct" >A. docker swarm init</p>
+<p>B. docker swarm create</p>
+<p>C. docker cluster init</p>
+<p>D. docker manager start</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/swarm/">https://docs.docker.com/engine/reference/commandline/swarm/</a></li>
+</ul>
+<p>To initialize a Docker swarm mode cluster as a manager node, you use the 'docker swarm init' command. This command sets up the current node as a manager and provides a token that can be used to join worker nodes to the swarm.</p>
+</article>
+</details>
+<ol>
+<li>How do you manage Swarm services in Docker?</li>
+</ol>
+<p>A. docker swarm service</p>
+<p>B. docker manage service</p>
+<p>C. docker control service</p>
+<p  class="correct" >D. docker service</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/service/">https://docs.docker.com/engine/reference/commandline/service/</a></li>
+</ul>
+<p>To manage Swarm services in Docker, you use the 'docker service' command. This command provides functionalities to manage services in a Docker Swarm mode cluster.</p>
+</article>
+</details>
+<ol>
+<li>Why is quorum important in a Docker swarm cluster?</li>
+</ol>
+<p>A. It ensures that there is enough storage space across nodes.</p>
+<p>B. It ensures that all nodes have the same Docker version.</p>
+<p  class="correct" >C. It prevents network partitions and ensures consistent operations.</p>
+<p>D. It allows for faster network communication between nodes.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/swarm/">https://docs.docker.com/engine/reference/commandline/swarm/</a></li>
+</ul>
+<p>Quorum is crucial in a Docker swarm cluster to maintain consistency. It ensures that there are enough manager nodes in agreement to prevent network partitions and guarantee that operations are consistent across the cluster. If a swarm loses the majority of its manager nodes, the remaining nodes will go into a locked state to preserve data consistency.</p>
+</article>
+</details>
+<ol>
+<li>What is the primary difference between running a container and running a service in Docker?</li>
+</ol>
+<p>A. A container is for individual tasks, while a service is for long-running applications.</p>
+<p>B. A service is a type of container with additional networking capabilities.</p>
+<p>C. A container and a service are the same in Docker.</p>
+<p  class="correct" >D. A service is a cluster management command, while a container is not.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/service/">https://docs.docker.com/engine/reference/commandline/service/</a></li>
+</ul>
+<p>In Docker, a container is an isolated environment in which applications run, while a service is specifically related to Swarm mode and is used for managing services within a Swarm cluster. The 'docker service' command must be executed on a swarm manager node and is used for managing Swarm services.</p>
+</article>
+</details>
+<ol>
+<li>Given the output of the 'docker inspect' command, which of the following options will display the total size of all the files in a container?</li>
+</ol>
+<p>A. SizeTotal</p>
+<p  class="correct" >B. SizeRootFs</p>
+<p>C. ContainerSize</p>
+<p>D. TotalFileSize</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/inspect/">https://docs.docker.com/engine/reference/commandline/inspect/</a></li>
+</ul>
+<p>The 'SizeRootFs' field in the output of the 'docker inspect' command represents the total size of all the files in the container, in bytes. This field provides insights into the storage footprint of the container's filesystem.</p>
+</article>
+</details>
+<ol>
+<li>How can you convert an application deployment into a stack file using a YAML compose file with &quot;docker stack deploy&quot;?</li>
+</ol>
+<p  class="correct" >A. docker stack deploy -c <compose-file> <stack-name></p>
+<p>B. docker stack create -f <compose-file> <stack-name></p>
+<p>C. docker stack init -c <compose-file> <stack-name></p>
+<p>D. docker stack setup --file <compose-file> <stack-name></p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/stack/">https://docs.docker.com/engine/reference/commandline/stack/</a></li>
+</ul>
+<p>To convert an application deployment into a stack file using a YAML compose file, you use the 'docker stack deploy' command with the '-c' option followed by the path to the compose file and the name of the stack. This command deploys a new stack or updates an existing stack.</p>
+</article>
+</details>
+<ol>
+<li>You are tasked with deploying a new service in an existing Docker Swarm stack. Which sequence of commands would you use to achieve this?</li>
+</ol>
+<p>A. 1. docker stack deploy -c <compose-file> <stack-name> 2. docker service create <service-name></p>
+<p>B. 1. docker service create <service-name> 2. docker stack deploy -c <compose-file> <stack-name></p>
+<p>C. 1. docker stack create <stack-name> 2. docker service deploy <service-name></p>
+<p  class="correct" >D. 1. docker stack ls 2. docker stack deploy -c <compose-file> <stack-name> 3. docker service ls</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/stack/">https://docs.docker.com/engine/reference/commandline/stack/</a></li>
+</ul>
+<p>To deploy a new service in an existing Docker Swarm stack, you would first list the existing stacks using 'docker stack ls'. Then, you would deploy the service using the 'docker stack deploy' command with the appropriate compose file and stack name. Finally, you can verify the service deployment with 'docker service ls'.</p>
+</article>
+</details>
+<ol>
+<li>In the context of Docker Swarm, which of the following statements is true regarding the 'docker service' command?</li>
+</ol>
+<p>A. The 'docker service' command can be executed on any node within the Swarm.</p>
+<p>B. The 'docker service' command is used to manage individual containers within a service.</p>
+<p>C. The 'docker service' command is only related to standalone Docker and not Swarm.</p>
+<p  class="correct" >D. The 'docker service' command is a cluster management command and must be executed on a swarm manager node.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/service/">https://docs.docker.com/engine/reference/commandline/service/</a></li>
+</ul>
+<p>The 'docker service' command is used to manage Swarm services. It is a cluster management command and must be executed on a swarm manager node. Swarm manager nodes are responsible for the orchestration and cluster management, and only they can execute commands that manage the cluster.</p>
+</article>
+</details>
+<ol>
+<li>How can you increase the number of replicas for a service named 'web' to 5 in Docker Swarm?</li>
+</ol>
+<p>A. docker service scale web=5</p>
+<p>B. docker service replicas web=5</p>
+<p  class="correct" >C. docker service update --replicas=5 web</p>
+<p>D. docker swarm update web --replicas=5</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/service_update/">https://docs.docker.com/engine/reference/commandline/service_update/</a></li>
+</ul>
+<p>To increase the number of replicas for a service in Docker Swarm, you use the 'docker service update' command with the '--replicas' option. The correct syntax is 'docker service update --replicas=&lt;number_of_replicas&gt; &lt;service_name&gt;'.</p>
+</article>
+</details>
+<ol>
+<li>When creating a new service in Docker, which option allows you to publish a port as a node port?</li>
+</ol>
+<p>A. --expose-port</p>
+<p>B. --open-port</p>
+<p>C. --port-forward</p>
+<p  class="correct" >D. --publish</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/service_create/">https://docs.docker.com/engine/reference/commandline/service_create/</a></li>
+</ul>
+<p>The '--publish' or '-p' option allows you to publish a port as a node port when creating a new service in Docker. This option makes the service accessible externally through the specified port.</p>
+</article>
+</details>
+<ol>
+<li>Which command can be used to perform a rolling restart of a Docker service without making any changes to the service parameters?</li>
+</ol>
+<p>A. docker service restart --force</p>
+<p>B. docker service refresh</p>
+<p  class="correct" >C. docker service update --force</p>
+<p>D. docker service reset</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/service_update/">https://docs.docker.com/engine/reference/commandline/service_update/</a></li>
+</ul>
+<p>The 'docker service update --force' command can be used to perform a rolling restart of a service without making any changes to the service parameters. The '--force' flag causes the service's tasks to be shut down and replaced with new ones even if none of the other parameters would normally cause that to happen.</p>
+</article>
+</details>
+<ol>
+<li>What is the primary purpose of a Dockerfile in Docker image creation?</li>
+</ol>
+<p>A. To define the runtime environment variables for a container.</p>
+<p>B. To specify the network settings for a Docker container.</p>
+<p>C. To automate the deployment of applications inside a container.</p>
+<p  class="correct" >D. To define a set of instructions for creating a Docker image.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/">https://docs.docker.com/engine/reference/builder/</a></li>
+</ul>
+<p>A Dockerfile is a text file that contains a set of instructions used to create a Docker image. These instructions include setting up the operating system, installing applications, and configuring settings. It does not define runtime environment variables, specify network settings, or automate the deployment of applications inside a container.</p>
+</article>
+</details>
+<ol>
+<li>In a Dockerfile, what is the primary difference between the 'ADD' and 'COPY' commands?</li>
+</ol>
+<p>A. 'ADD' can only copy files, while 'COPY' can copy files and directories.</p>
+<p>B. 'ADD' requires a URL as the source, while 'COPY' requires a local file or directory.</p>
+<p  class="correct" >C. 'ADD' can fetch files from URLs and has the capability to auto-extract tarball archives, while 'COPY' only copies files or directories from the local context.</p>
+<p>D. 'COPY' can fetch files from URLs, while 'ADD' can only copy from the local context.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/#add">https://docs.docker.com/engine/reference/builder/#add</a></li>
+</ul>
+<p>The 'ADD' command in a Dockerfile can handle URLs as a source and can also auto-extract tarball archives. On the other hand, 'COPY' is a more straightforward command that only copies files or directories from the local context to the container.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following is NOT a main component of a Dockerfile?</li>
+</ol>
+<p>A. FROM</p>
+<p>B. RUN</p>
+<p>C. CMD</p>
+<p  class="correct" >D. EXECUTE</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/">https://docs.docker.com/engine/reference/builder/</a></li>
+</ul>
+<p>The main components of a Dockerfile include 'FROM', 'RUN', and 'CMD'. 'EXECUTE' is not a valid Dockerfile instruction.</p>
+</article>
+</details>
+<ol>
+<li>How can you ensure that a Docker image is efficient when created via a Dockerfile?</li>
+</ol>
+<p>A. Always use the latest version of the base image, regardless of its size.</p>
+<p>B. Include all development tools and packages in the final image.</p>
+<p  class="correct" >C. Use multi-stage builds to separate build-time and runtime dependencies.</p>
+<p>D. Always run the 'docker prune' command before building the image.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">https://docs.docker.com/develop/develop-images/multistage-build/</a></li>
+</ul>
+<p>Multi-stage builds allow you to use multiple <code>FROM</code> statements in your Dockerfile. Each <code>FROM</code> instruction can use a different base image, and only the final stage will be kept. This allows you to separate build-time dependencies from runtime dependencies, thus reducing the size of the final image.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following CLI commands correctly demonstrates how to list all Docker images and then delete a specific image by its ID?</li>
+</ol>
+<p>A. docker list-images &amp;&amp; docker delete &lt;IMAGE_ID&gt;</p>
+<p  class="correct" >B. docker images &amp;&amp; docker rmi &lt;IMAGE_ID&gt;</p>
+<p>C. docker show-images &amp;&amp; docker remove-image &lt;IMAGE_ID&gt;</p>
+<p>D. docker display-images &amp;&amp; docker del &lt;IMAGE_ID&gt;</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>The 'docker images' command lists all Docker images on the host, and the 'docker rmi' command removes a specific image by its ID. The other options are not valid Docker CLI commands.</p>
+</article>
+</details>
+<ol>
+<li>Which statement best describes the purpose and usage of the &quot;prune&quot; and &quot;rmi&quot; CLI commands in Docker?</li>
+</ol>
+<p>A. &quot;prune&quot; is used to list all Docker images, while &quot;rmi&quot; is used to remove a specific image by its ID.</p>
+<p>B. &quot;prune&quot; is used to remove all unused Docker images, while &quot;rmi&quot; is used to list all Docker images.</p>
+<p  class="correct" >C. &quot;prune&quot; is used to remove all unused Docker images, while &quot;rmi&quot; is used to remove a specific image by its ID.</p>
+<p>D. &quot;prune&quot; is used to remove a specific image by its ID, while &quot;rmi&quot; is used to list all Docker images.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>The 'docker image prune' command removes all unused images, while the 'docker rmi' command removes a specific image by its ID or name. The other options are not accurate descriptions of the commands' functionalities.</p>
+</article>
+</details>
+<ol>
+<li>When inspecting a Docker image using the CLI, which command correctly demonstrates the use of the &quot;filter&quot; and &quot;format&quot; options to report specific attributes?</li>
+</ol>
+<p>A. docker inspect --filter='{{.RepoTags}}' --format='{{.Id}}' IMAGE_NAME</p>
+<p>B. docker inspect IMAGE_NAME --filter='{{.RepoTags}}' --format='{{.Id}}'</p>
+<p  class="correct" >C. docker inspect IMAGE_NAME --format='{{.Id}}' --filter='{{.RepoTags}}'</p>
+<p>D. docker inspect --format='{{.Id}}' IMAGE_NAME --filter='{{.RepoTags}}'</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>The 'docker inspect' command is used to view detailed information about Docker objects, including images. The '--format' option allows you to format the output using Go templating, while the '--filter' option is not directly applicable to 'docker inspect'. The correct usage in this context is to use the '--format' option to specify the desired attributes.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following best describes the process and significance of tagging a Docker image?</li>
+</ol>
+<p  class="correct" >A. Tagging an image allows you to assign a version number to the image, but it doesn't affect the image's content.</p>
+<p>B. Tagging an image changes the content of the image to match the specified version.</p>
+<p>C. Tagging an image is a mandatory step before pushing it to a Docker registry.</p>
+<p>D. Tagging an image compresses it for optimized storage in a Docker registry.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>Tagging a Docker image provides a way to version the image. It is a reference to a specific image and does not change the content of the image. Tags are useful for maintaining different versions of an image or for using meaningful names instead of just image IDs.</p>
+</article>
+</details>
+<ol>
+<li>Which Docker CLI command allows you to apply a specific file to create a Docker image?</li>
+</ol>
+<p>A. docker apply</p>
+<p>B. docker file-apply</p>
+<p  class="correct" >C. docker build</p>
+<p>D. docker create-image</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>The 'docker build' command is used to build Docker images from a Dockerfile and a 'context'. A build's context is the set of files located in the specified PATH or URL. The build process can refer to any of the files in the context. The 'docker build' command processes this context and uses the Dockerfile to produce the image.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following is NOT considered a best practice when working with Docker registries?</li>
+</ol>
+<p>A. Using Registry storage drivers to enable support for specific cloud providers.</p>
+<p>B. Regularly authenticating with the Docker Registry using token authentication.</p>
+<p  class="correct" >C. Storing sensitive information in plain text within the registry.</p>
+<p>D. Facilitating the distribution of images to the Docker engine using the Registry API.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/reference/">https://docs.docker.com/reference/</a></li>
+</ul>
+<p>Sensitive information should never be stored in plain text within the registry or any other platform. It poses a security risk and can lead to unauthorized access or data breaches. The other options are considered best practices when working with Docker registries.</p>
+</article>
+</details>
+<ol>
+<li>When planning for a Docker installation in a production environment, which of the following factors is LEAST relevant for determining the sizing requirements?</li>
+</ol>
+<p>A. The I/O patterns of applications that will run in containers.</p>
+<p>B. The network latency between the Docker daemon and the Docker Registry.</p>
+<p>C. The expected rate of image pulls and pushes to the Docker Registry.</p>
+<p  class="correct" >D. The default logging level set for the Docker daemon.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/reference/">https://docs.docker.com/reference/</a></li>
+</ul>
+<p>While I/O patterns, network latency, and the rate of image operations can all impact the performance and sizing requirements of a Docker installation, the default logging level of the Docker daemon, though it can affect disk usage, is generally a less critical factor in determining overall sizing requirements for a production environment.</p>
+</article>
+</details>
+<ol>
+<li>Which command is used to push all tags of a local Docker image to a registry?</li>
+</ol>
+<p>A. docker push --all</p>
+<p  class="correct" >B. docker image push --all-tags</p>
+<p>C. docker commit --all-tags</p>
+<p>D. docker save --all-tags</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/push/">https://docs.docker.com/engine/reference/commandline/push/</a></li>
+</ul>
+<p>The 'docker image push --all-tags' command is used to push all tags of a local Docker image to a registry. This allows you to push multiple versions or variations of an image at once.</p>
+</article>
+</details>
+<ol>
+<li>How do you configure a Docker container to use the Splunk logging driver?</li>
+</ol>
+<p>A. $ docker run -it --log-driver splunk alpine ash</p>
+<p  class="correct" >B. $ docker run -it --log-driver=splunk alpine ash</p>
+<p>C. $ docker run -it --logging-driver splunk alpine ash</p>
+<p>D. $ docker run -it --logging-driver=splunk alpine ash</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/config/containers/logging/configure/">https://docs.docker.com/config/containers/logging/configure/</a></li>
+</ul>
+<p>To configure a Docker container to use a specific logging driver, you can use the '--log-driver' flag followed by the name of the logging driver. In this case, the correct syntax is '--log-driver=splunk'.</p>
+</article>
+</details>
+<ol>
+<li>When initializing a Docker Swarm, which command option is used to specify the address or interface to advertise the swarm manager to other nodes in the swarm?</li>
+</ol>
+<p  class="correct" >A. --advertise-addr</p>
+<p>B. --manager-addr</p>
+<p>C. --swarm-addr</p>
+<p>D. --init-addr</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/swarm/">https://docs.docker.com/engine/reference/commandline/swarm/</a></li>
+</ul>
+<p>The '--advertise-addr' option is used when initializing a Docker Swarm to specify the address or interface to advertise the swarm manager to other nodes in the swarm. This address must be reachable by other nodes in the swarm.</p>
+</article>
+</details>
+<ol>
+<li>In a Docker Swarm, you have a manager node that has been compromised. What is the recommended first step to ensure the integrity of the swarm?</li>
+</ol>
+<p>A. Immediately shut down the entire swarm.</p>
+<p>B. Promote another worker node to be the manager.</p>
+<p  class="correct" >C. Demote the compromised manager node.</p>
+<p>D. Isolate the compromised manager node from the network and analyze it.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/node/">https://docs.docker.com/engine/reference/commandline/node/</a></li>
+</ul>
+<p>If a manager node is believed to be compromised, the first recommended step is to demote it. This ensures that it no longer has control over the swarm while preserving the integrity and functionality of the swarm. After demotion, further actions like isolating and analyzing the node can be taken.</p>
+</article>
+</details>
+<ol>
+<li>When setting up a backup schedule for a Docker swarm, which of the following is the most recommended approach?</li>
+</ol>
+<p>A. Use the <code>docker swarm backup</code> command.</p>
+<p>B. Manually copy the contents of the swarm directory to a backup location.</p>
+<p  class="correct" >C. Use a third-party backup tool integrated with Docker's API.</p>
+<p>D. Rely on the automatic backups created by Docker every 24 hours.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/swarm/">https://docs.docker.com/engine/reference/commandline/swarm/</a></li>
+</ul>
+<p>Docker does not provide a built-in <code>docker swarm backup</code> command. Instead, it's recommended to use third-party backup tools that integrate with Docker's API to ensure consistent and reliable backups of the swarm's state and data.</p>
+</article>
+</details>
+<ol>
+<li>In a Docker environment with multiple teams working on different projects, which of the following is the primary reason for implementing a granular role-based access control (RBAC) system for users and teams?</li>
+</ol>
+<p>A. To ensure that each team can customize the Docker UI according to their preferences.</p>
+<p>B. To facilitate easier collaboration between teams by allowing unrestricted access to all resources.</p>
+<p  class="correct" >C. To ensure that resources, such as specific containers or images, are only accessible to those with the necessary permissions, thereby safeguarding sensitive data and operations.</p>
+<p>D. To reduce the computational overhead by limiting the number of active users in the Docker environment.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>In a multi-team Docker environment, implementing a granular RBAC system is crucial for security. It ensures that specific resources are only accessible by authorized individuals or teams, preventing potential unauthorized access or misuse of sensitive data and operations.</p>
+</article>
+</details>
+<ol>
+<li>Considering the various platforms and architectures supported by Docker Engine, which of the following combinations is NOT officially supported by Docker for installation?</li>
+</ol>
+<p>A. Docker Desktop for Mac (macOS) on arm64 (Apple Silicon)</p>
+<p>B. Docker on CentOS for ppc64le architecture</p>
+<p  class="correct" >C. Docker on Raspberry Pi OS for x86_64 / amd64 architecture</p>
+<p>D. Docker on Ubuntu for s390x architecture</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/install/">https://docs.docker.com/engine/install/</a></li>
+</ul>
+<p>Raspberry Pi OS primarily supports the ARM architecture. Docker on Raspberry Pi OS for x86_64 / amd64 architecture is not an officially supported combination.</p>
+</article>
+</details>
+<ol>
+<li>How do you ensure that a Docker daemon has the appropriate rights to access specific images on a registry?</li>
+</ol>
+<p>A. Use the <code>docker access</code> command with the registry URL.</p>
+<p>B. Set the <code>docker group</code> to root equivalent.</p>
+<p>C. Specify the registry domain in the <code>credHelpers</code> section of the Docker configuration file.</p>
+<p  class="correct" >D. Use the <code>docker login</code> command with the appropriate credentials.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/login/">https://docs.docker.com/engine/reference/commandline/login/</a></li>
+</ul>
+<p>To ensure that a Docker daemon has the appropriate rights to access specific images on a registry, you need to use the <code>docker login</code> command with the appropriate credentials. When you log in, the command stores credentials in <code>$HOME/.docker/config.json</code> on Linux or <code>%USERPROFILE%/.docker/config.json</code> on Windows. The Docker Engine can also keep user credentials in an external credential store for added security.</p>
+</article>
+</details>
+<ol>
+<li>In Docker Swarm mode, what happens when a service is set to run 10 replicas of a container, and a worker machine hosting two of those replicas crashes?</li>
+</ol>
+<p>A. The crashed replicas are ignored, and the service continues with 8 replicas.</p>
+<p>B. The service stops until the worker machine is restored.</p>
+<p  class="correct" >C. The swarm manager creates two new replicas on another available worker.</p>
+<p>D. The service is terminated and needs to be manually restarted.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/swarm/">https://docs.docker.com/engine/swarm/</a></li>
+</ul>
+<p>In Docker Swarm mode, the swarm manager node constantly monitors the cluster state and reconciles any differences between the actual state and the expressed desired state. If a service is set to run a certain number of replicas and some of them crash, the swarm manager will create new replicas to replace the ones that crashed, ensuring the desired state is maintained.</p>
+</article>
+</details>
+<ol>
+<li>Within Docker's Container Network Model (CNM), which component is responsible for ensuring that containers can communicate with each other and other network endpoints?</li>
+</ol>
+<p>A. The IPAM driver, which allocates IP addresses.</p>
+<p  class="correct" >B. The network driver, which provides the networking capabilities.</p>
+<p>C. The storage driver, which manages data storage.</p>
+<p>D. The logging driver, which handles logs.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/network/">https://docs.docker.com/engine/reference/commandline/network/</a></li>
+</ul>
+<p>In Docker's Container Network Model (CNM), the network driver is responsible for providing the necessary networking capabilities to ensure containers can communicate with each other and other network endpoints. The IPAM driver, on the other hand, is primarily concerned with IP address management.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following is NOT a built-in network driver in Docker?</li>
+</ol>
+<p  class="correct" >A. bridge</p>
+<p>B. overlay</p>
+<p>C. macvlan</p>
+<p  class="correct" >D. netlink</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/network/">https://docs.docker.com/engine/reference/commandline/network/</a></li>
+</ul>
+<p>Docker provides several built-in network drivers, such as 'bridge', 'overlay', and 'macvlan'. 'netlink' is not a built-in network driver in Docker.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following describes the type of traffic that flows between the Docker engine and a Docker registry when pushing an image?</li>
+</ol>
+<p>A. Traffic related to container runtime statistics.</p>
+<p>B. Traffic related to Docker CLI commands.</p>
+<p  class="correct" >C. Traffic related to image distribution and storage.</p>
+<p>D. Traffic related to Docker Swarm node management.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>When pushing an image, the traffic between the Docker engine and the Docker registry pertains to the distribution and storage of the image. This involves transferring the image layers and metadata to the registry for storage and subsequent retrieval.</p>
+</article>
+</details>
+<ol>
+<li>Why is port publishing essential when deploying applications in Docker containers?</li>
+</ol>
+<p>A. To increase the memory allocation for the container.</p>
+<p>B. To ensure that the application inside the container can communicate with external services.</p>
+<p  class="correct" >C. To make the application accessible from outside the container.</p>
+<p>D. To encrypt the data traffic between containers.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/cli/">https://docs.docker.com/engine/reference/commandline/cli/</a></li>
+</ul>
+<p>Port publishing in Docker allows the application inside the container to be accessible from outside the container. Without publishing the port, the application would only be accessible from within the container itself, limiting its usability.</p>
+</article>
+</details>
+<ol>
+<li>Given a scenario where you need to isolate containers within their own network but still allow them to communicate with each other, which built-in Docker network driver would be most appropriate to use?</li>
+</ol>
+<p>A. host</p>
+<p>B. none</p>
+<p>C. overlay</p>
+<p>D. bridge</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/network/">https://docs.docker.com/engine/reference/commandline/network/</a></li>
+</ul>
+<p>The 'bridge' network driver is the default network driver for standalone containers. It provides a private internal IP to each container and allows them to communicate with each other and the host machine. This makes it suitable for scenarios where containers need to be isolated within their own network but still need to communicate with each other.</p>
+</article>
+</details>
+<ol>
+<li>After publishing a port in Docker, how can you verify that an application is accessible externally?</li>
+</ol>
+<p>A. Use the 'docker inspect' command to check the port bindings.</p>
+<p>B. Check the application's logs for any external access entries.</p>
+<p  class="correct" >C. Use the 'docker port' command followed by the container name and private port.</p>
+<p>D. Access the application via a web browser using the published port.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/port/">https://docs.docker.com/engine/reference/commandline/port/</a></li>
+</ul>
+<p>The 'docker port' command allows you to list port mappings or a specific mapping for a container. By using this command followed by the container name and the private port, you can determine the external port to which the application is mapped.</p>
+</article>
+</details>
+<ol>
+<li>What are the advantages of deploying a service on a Docker overlay network compared to other network types?</li>
+</ol>
+<p>A. It allows for automatic IP address assignment.</p>
+<p>B. It provides built-in load balancing for service discovery.</p>
+<p>C. It restricts communication between containers to the same host.</p>
+<p  class="correct" >D. It enhances the security by encrypting container data traffic.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/network/overlay/">https://docs.docker.com/network/overlay/</a></li>
+</ul>
+<p>Docker overlay networks, when used with Swarm mode, encrypt the traffic between the services using IPSEC, which provides a secure method for containers on different nodes to communicate with each other.</p>
+</article>
+</details>
+<ol>
+<li>How does the Kubernetes container network model differ from Docker's Container Network Model (CNM)?</li>
+</ol>
+<p>A. Kubernetes uses the bridge network by default, while Docker uses the overlay network.</p>
+<p>B. Kubernetes does not support network plugins, while Docker does.</p>
+<p>C. Kubernetes requires all pods to be on the same subnet, while Docker containers can be on different subnets.</p>
+<p  class="correct" >D. Kubernetes uses a flat network space where every Pod can communicate with every other Pod, while Docker uses segmented networks.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/reference/">https://docs.docker.com/reference/</a></li>
+</ul>
+<p>Kubernetes employs a flat network model, ensuring that all pods can communicate with each other without NAT. Docker's CNM, on the other hand, provides various networking modes, including bridge, overlay, and host, which can result in segmented networks.</p>
+</article>
+</details>
+<ol>
+<li>What are the primary tasks associated with Docker security administration?</li>
+</ol>
+<p>A. Configuring container runtime to use a custom DNS server.</p>
+<p>B. Setting up automated build pipelines for Docker images.</p>
+<p>C. Managing user access and roles in Docker Hub.</p>
+<p  class="correct" >D. Implementing image signing and verifying the integrity of images.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/security/trust/content_trust/">https://docs.docker.com/engine/security/trust/content_trust/</a></li>
+</ul>
+<p>One of the primary tasks associated with Docker security administration is ensuring the integrity and authenticity of images. This can be achieved by implementing image signing and verifying the signatures before deploying them. While the other options are important tasks in Docker, they are not directly related to security administration.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following best describes the significance and process of signing a Docker image using Docker Content Trust (DCT)?</li>
+</ol>
+<p>A. DCT allows image publishers to add metadata to images, enhancing searchability in Docker Hub.</p>
+<p>B. DCT encrypts the image content, ensuring that it cannot be read without the appropriate decryption key.</p>
+<p  class="correct" >C. DCT provides a mechanism for image publishers to sign their images, allowing consumers to verify both the integrity and the publisher of the image.</p>
+<p>D. DCT compresses the image, reducing its size for faster downloads from Docker Hub.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/security/trust/content_trust/">https://docs.docker.com/engine/security/trust/content_trust/</a></li>
+</ul>
+<p>Docker Content Trust (DCT) offers the ability to use digital signatures for data sent to and received from Docker registries. These signatures enable client-side or runtime verification of the integrity and publisher of specific image tags. Image publishers can sign their images, and consumers can ensure the images they pull are signed, ensuring trust in the content.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following best describes the default security measures in place for the Docker engine?</li>
+</ol>
+<p>A. Docker containers run with full root privileges by default, granting them unrestricted access to the host system.</p>
+<p>B. Docker uses TOMOYO, AppArmor, SELinux, and GRSEC simultaneously to provide layered security for containers.</p>
+<p  class="correct" >C. Docker starts containers with a restricted set of capabilities, ensuring that &quot;root&quot; within a container has fewer privileges than the real &quot;root&quot;.</p>
+<p>D. Docker containers, by default, can freely communicate with each other and the Docker host without any network restrictions.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
+</ul>
+<p>By default, Docker starts containers with a restricted set of capabilities, turning the binary &quot;root/non-root&quot; dichotomy into a fine-grained access control system. This means that &quot;root&quot; within a container has much less privileges than the real &quot;root&quot;. This reduces the vectors of attack by malicious users considerably. Docker drops all capabilities except those needed, using an allowlist approach.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following best describes the default security configurations for Docker swarm?</li>
+</ol>
+<p>A. Docker swarm uses plain text communication between nodes by default.</p>
+<p>B. Docker swarm requires manual setup of TLS certificates for secure communication.</p>
+<p  class="correct" >C. Docker swarm uses mutual TLS (mTLS) for node authentication and encrypted communication by default.</p>
+<p>D. Docker swarm relies on external tools for node authentication and encrypted communication.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/swarm/">https://docs.docker.com/engine/swarm/</a></li>
+</ul>
+<p>By default, Docker swarm uses mutual TLS (mTLS) to ensure both node authentication and encrypted communication between nodes in the swarm. This ensures that all communication between nodes in the swarm is secure and comes from a recognized member of the swarm.</p>
+</article>
+</details>
+<ol>
+<li>What is the primary purpose of creating a UCP client bundle?</li>
+</ol>
+<p>A. To backup the UCP configuration.</p>
+<p  class="correct" >B. To authenticate a client to the UCP server using client certificates.</p>
+<p>C. To deploy services directly from the UCP web UI.</p>
+<p>D. To upgrade the UCP version.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/">https://docs.docker.com/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/</a></li>
+</ul>
+<p>A UCP client bundle is primarily used to authenticate a client to the UCP server. It contains client certificates and configuration files that allow users to interact with the UCP server securely using the Docker CLI without needing to authenticate again.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following is NOT a recommended security best practice when working with Docker images?</li>
+</ol>
+<p  class="correct" >A. Each container should have multiple responsibilities.</p>
+<p>B. Containers should be immutable, lightweight, and fast.</p>
+<p>C. Use a small base image (such as Linux Alpine).</p>
+<p>D. Avoid installing unnecessary packages.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/develop/security-best-practices/">https://docs.docker.com/develop/security-best-practices/</a></li>
+</ul>
+<p>One of the best practices for Docker security is to ensure that each container has only one responsibility. This makes containers easier to manage, scale, and secure. Having multiple responsibilities in a single container goes against the principle of containerization and can introduce complexities and vulnerabilities.</p>
+</article>
+</details>
+<ol>
+<li>After signing a Docker image, how can you verify its authenticity?</li>
+</ol>
+<p>A. Use the 'docker trust verify' command.</p>
+<p  class="correct" >B. Use the 'docker trust inspect' command.</p>
+<p>C. Check the image's SHA256 digest in the Docker Hub.</p>
+<p>D. Review the image's metadata in the Dockerfile.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/security/trust/">https://docs.docker.com/engine/security/trust/</a></li>
+</ul>
+<p>The 'docker trust inspect' command provides detailed information about the trust and signatures of an image, allowing users to verify the authenticity of the image. It displays the signatures for the image tags and the signers.</p>
+</article>
+</details>
+<ol>
+<li>How does Docker manage access control for users and containers?</li>
+</ol>
+<p>A. By using a built-in role-based access control (RBAC) system.</p>
+<p>B. By relying solely on the host operating system's user permissions.</p>
+<p>C. By using an external third-party access control system.</p>
+<p  class="correct" >D. By using authorization plugins that approve or deny requests to the Docker daemon.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/extend/plugins_authorization/">https://docs.docker.com/engine/extend/plugins_authorization/</a></li>
+</ul>
+<p>Docker uses authorization plugins to manage access control. These plugins approve or deny requests to the Docker daemon based on the current authentication context and the command context. This allows for granular access policies and greater control over access to the Docker daemon.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following is NOT a security layer in Docker?</li>
+</ol>
+<p>A. Kernel namespaces to isolate processes.</p>
+<p>B. Control Groups (cgroups) for resource accounting and limiting.</p>
+<p>C. Docker Content Trust for image signature verification.</p>
+<p  class="correct" >D. Docker Firewall to block external malicious traffic.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
+</ul>
+<p>Docker provides multiple layers of security such as Kernel namespaces for process isolation, Control Groups (cgroups) for resource management, and Docker Content Trust for image signature verification. However, there is no feature specifically named 'Docker Firewall' for blocking external malicious traffic in the context provided.</p>
+</article>
+</details>
+<ol>
+<li>How does Docker determine which graph driver to use with different operating systems?</li>
+</ol>
+<p>A. Docker uses a fixed graph driver for each operating system.</p>
+<p>B. Docker allows users to specify any graph driver regardless of the operating system.</p>
+<p  class="correct" >C. Docker automatically selects the most appropriate graph driver based on the host operating system.</p>
+<p>D. Docker relies on third-party plugins to determine the graph driver.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/extend/plugins_graphdriver/">https://docs.docker.com/engine/extend/plugins_graphdriver/</a></li>
+</ul>
+<p>Docker is designed to automatically select the most suitable graph driver based on the host operating system. While users can specify a graph driver, Docker's default behavior is to choose the best match for the OS to ensure compatibility and performance.</p>
+</article>
+</details>
+<ol>
+<li>In a Docker environment, which type of storage is described as being massively scalable, referenced by an object ID, and primarily designed for scalability, making it a popular choice for public cloud providers?</li>
+</ol>
+<p>A. File System Storage</p>
+<p>B. Block Storage</p>
+<p  class="correct" >C. Object Storage</p>
+<p>D. Union File System Storage</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li></li>
+</ul>
+<p>Object storage is different from file system storage or block storage. Data in object storage is stored as an object and is referenced by an object ID. It is designed primarily for scalability, making it a popular choice for public cloud providers. Object storage is massively scalable and allows for a high degree of flexibility with regard to associating attributes with objects.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following is NOT a recommended best practice for managing storage in a Docker environment?</li>
+</ol>
+<p>A. Using volumes to persist data in Docker containers and services.</p>
+<p>B. Using bind mounts for sharing configuration files from the host machine to containers.</p>
+<p  class="correct" >C. Storing sensitive information in a container's writable layer.</p>
+<p>D. Using tmpfs mounts for data that should not persist on the host machine or within the container.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/storage/">https://docs.docker.com/storage/</a></li>
+</ul>
+<p>Storing sensitive information in a container's writable layer is not recommended because it can increase the size of the container and is less efficient. Instead, it's better to use volumes or tmpfs mounts to manage such data. Volumes are the preferred way to persist data in Docker, and tmpfs mounts are best for data that shouldn't persist.</p>
+</article>
+</details>
+<ol>
+<li>How can you backup data from a Docker container?</li>
+</ol>
+<p>A. Use the 'docker container save' command to save container data.</p>
+<p>B. Directly copy data from the container's filesystem using the host OS tools.</p>
+<p  class="correct" >C. Commit the container to an image using 'docker container commit' and then push the image to Docker Hub or save it to a local tar file.</p>
+<p>D. Use the 'docker container export' command to export container data to an external storage.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/desktop/backup-and-restore/">https://docs.docker.com/desktop/backup-and-restore/</a></li>
+</ul>
+<p>To backup data from a Docker container, you can commit the container to an image using the 'docker container commit' command. This stores the container filesystem changes and some of the container's configuration. Once committed, you can either push the image to Docker Hub using 'docker push' or save it to a local tar file using 'docker image save'. Note that changes in volumes attached to the container are not included in the image and must be backed up separately.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following best describes the lifecycle of a Docker volume?</li>
+</ol>
+<p>A. Volumes are automatically deleted when the container using them is stopped.</p>
+<p>B. Volumes can only be created when starting a container and are deleted when the container is removed.</p>
+<p  class="correct" >C. Volumes are created using the Docker CLI or when starting a container with a not-yet-created volume, and they persist beyond the lifecycle of a container.</p>
+<p>D. Volumes are temporary storage mechanisms and their data is cleared every time the Docker daemon restarts.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/storage/volumes/">https://docs.docker.com/storage/volumes/</a></li>
+</ul>
+<p>Docker volumes are designed to persist data beyond the lifecycle of a container. They can be created using the Docker CLI with commands like 'docker volume create' or automatically when starting a container that specifies a volume that doesn't yet exist. Unlike the container's writable layer, data in the volume doesn't increase the size of the container and exists outside the lifecycle of the container.</p>
+</article>
+</details>
+<ol>
+<li>Which of the following is the recommended method for storing write-intensive data in Docker to ensure optimal performance and scalability?</li>
+</ol>
+<p>A. Store the data in the container's writable layer.</p>
+<p>B. Use Docker storage drivers to handle the data.</p>
+<p  class="correct" >C. Use Docker volumes.</p>
+<p>D. Store the data in the image's read-only layers.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/storage/storagedriver/">https://docs.docker.com/storage/storagedriver/</a></li>
+</ul>
+<p>For write-intensive applications, it's recommended not to store the data in the container. Instead, Docker volumes should be used. They are independent of the running container and are designed to be efficient for I/O. Volumes can also be shared among containers and do not increase the size of the container's writable layer.</p>
+</article>
+</details>
+<ol>
+<li>When creating a service using the 'docker service create' command, how can you specify environment variables for all tasks in a service?</li>
+</ol>
+<p>A. Using the --env-var flag followed by the environment variable.</p>
+<p>B. Using the --set-env flag followed by the environment variable.</p>
+<p  class="correct" >C. Using the --env flag followed by the environment variable.</p>
+<p>D. Using the --environment flag followed by the environment variable.</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/service_create/">https://docs.docker.com/engine/reference/commandline/service_create/</a></li>
+</ul>
+<p>The 'docker service create' command allows you to set environment variables for all tasks in a service using the --env flag followed by the environment variable. For example: '--env MYVAR=foo'.</p>
+</article>
+</details>
+</div>
