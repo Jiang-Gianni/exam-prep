@@ -1,5 +1,5 @@
 test:
-	rm -fr out && gmt -out out -head header_local.html
+	rm -fr docs && gmt -out docs -head header_local.html
 
 prod:
-	rm -fr out && gmt -out out -head header.html
+	rm -fr docs && gmt -out docs -head header.html
