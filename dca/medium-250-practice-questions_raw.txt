@@ -6,6 +6,10 @@ $1 $2
 <(.*?)>
 `<$1>`
 
+([a-zA-Z.`])$\n([a-zA-Z.`])
+$1\
+$2
+
 
 Questions to fix: 128, 150, 154, 155, 159, 161,
 There are 2 question number 53, one of them has been put as number 251

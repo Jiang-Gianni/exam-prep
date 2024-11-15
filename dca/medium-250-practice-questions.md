@@ -25,12 +25,12 @@ docker node ls
 
 5. How to add another manager to the swarm?
 
-// it generate the instructions for the manager to be added
+// it generate the instructions for the manager to be added\
 docker swarm join-token manager
 
 6. How to add another worker node to the swarm?
 
-// it generate the instructions for the worker to be added
+// it generate the instructions for the worker to be added\
 docker swarm join-token worker
 
 7. How to run the container?
@@ -39,12 +39,12 @@ docker run `<image>`
 
 8. What is the autolock feature in the Docker swarm?
 
-When Docker restarts, both the TLS key used to encrypt communication among swarm nodes, and the key used to encrypt and decrypt Raft logs on disk, are loaded into each manager node’s memory.
+When Docker restarts, both the TLS key used to encrypt communication among swarm nodes, and the key used to encrypt and decrypt Raft logs on disk, are loaded into each manager node’s memory.\
 Docker 1.13 introduces the ability to protect the mutual TLS encryption key and the key used to encrypt and decrypt Raft logs at rest, by allowing you to take ownership of these keys and to require manual unlocking of your managers. This feature is called autolock.
 
 9. How to lock the swarm?
 
-// This command produces unlock key. You need to place that in safe place
+// This command produces unlock key. You need to place that in safe place\
 docker swarm init --autolock
 
 10. How to unlock the swarm?
@@ -57,9 +57,9 @@ No. You can lock the existing swarm as well
 
 12. How to enable or disable autolock on the existing swarm?
 
-//enable autolock
+//enable autolock\
 docker swarm update --autolock=true
-//disable autolock
+//disable autolock\
 docker swarm update --autolock=false
 
 13. How to view the current unlock key for the running swarm?
@@ -76,7 +76,7 @@ Yes
 
 16. How to deploy a service in the docker swarm?
 
-// for the nginx image
+// for the nginx image\
 docker create service --replicas 3 --name nginx-web nginx
 
 17. How to list the services in the Docker swarm?
@@ -101,7 +101,7 @@ docker service ps `<service>`
 
 22. How to find out more details of the container running these tasks of the service?
 
-// you need to run this command on the particular node
+// you need to run this command on the particular node\
 docker ps
 
 23. If you are running co-related services in the docker swarm, what do you call this?
@@ -114,20 +114,20 @@ A stack is a group of interrelated services that share dependencies, and can be 
 
 25. Explain the several commands associated with Docker stack?
 
-// deploy the new stack or update
+// deploy the new stack or update\
 docker stack deploy -c `<compose file>`
-// list services in the stack
+// list services in the stack\
 docker stack services
-// list the tasks in the stack
+// list the tasks in the stack\
 docker stack ps
-// remove the stack
+// remove the stack\
 docker stack rm
-//List stack
+//List stack\
 docker stack ls
 
 26. How to filter the services in the stack?
 
-// with the help of --filter flag
+// with the help of --filter flag\
 docker stack service nginx-web --filter name=web
 
 27. How to format the output of the docker stack services command?
@@ -137,11 +137,11 @@ docker stack services --format "{{.ID}}: {{.Mode}} {{.Replicas}}"
 28. How to increase the number of replicas?
 
 docker service scale SERVICE=REPLICAS
-// example
+// example\
 docker service scale frontend=50
-// you can scale multiple services as well
+// you can scale multiple services as well\
 docker service scale frontend=50 backend=30
-// you can also scale with the update command
+// you can also scale with the update command\
 docker service update --replicas=50 frontend
 
 29. How to revert the changes for the service configuration?
@@ -150,8 +150,8 @@ docker service rollback my-service
 
 30. What are the networks available for the docker services?
 
-overlay networks: manage communications among the Docker daemons participating in the swarm.You can attach a service to one or more existing overlay networks as well, to enable service-to-service communication.
-ingress network: is a special overlay network that facilitates load balancing among a service’s nodes. When any swarm node receives a request on a published port, it hands that request off to a module called IPVS. IPVS keeps track of all the IP addresses participating in that service, selects one of them, and routes the request to it, over the ingress network.
+overlay networks: manage communications among the Docker daemons participating in the swarm.You can attach a service to one or more existing overlay networks as well, to enable service-to-service communication.\
+ingress network: is a special overlay network that facilitates load balancing among a service’s nodes. When any swarm node receives a request on a published port, it hands that request off to a module called IPVS. IPVS keeps track of all the IP addresses participating in that service, selects one of them, and routes the request to it, over the ingress network.\
 docker_gwbridge: is a bridge network that connects the overlay networks (including the ingress network) to an individual Docker daemon’s physical network.
 
 31. Is the ingress network created automatically when you initialize or join a swarm?
@@ -191,8 +191,8 @@ Yes
 37. How to find which networks the service is connected to?
 
 docker network inspect my-network
-               or
-docker service ls // for the name
+               or\
+docker service ls // for the name\
 docker service ps `<SERVICE>` // to list the networks
 
 38. Customize the ingress network involves removing and creating a new one and you need to do that before you create any services in the swarm. Is this statement correct?
@@ -201,7 +201,7 @@ Yes
 
 39. How to remove and create an ingress network?
 
-docker network rm ingress
+docker network rm ingress\
 docker network create \
   --driver overlay \
   --ingress \
@@ -228,7 +228,7 @@ No
 
 43. What are the volume drivers?
 
-When building fault-tolerant applications, you might need to configure multiple replicas of the same service to have access to the same files.
+When building fault-tolerant applications, you might need to configure multiple replicas of the same service to have access to the same files.\
 Volume drivers allow you to abstract the underlying storage system from the application logic. For example, if your services use a volume with an NFS driver, you can update the services to use a different driver, as an example to store data in the cloud, without changing the application logic.
 
 44. How to create a volume with the volume driver?
@@ -259,11 +259,11 @@ it's always best practice to use client bundle to troubleshoot UCP clusters
 
 49. What is the general flow when troubleshooting services or clusters?
 
-docker service ls
-docker service ps `<service>`
-docker service inspect `<service>`
-docker inspect `<task>`
-docker inspect `<container>`
+docker service ls\
+docker service ps `<service>`\
+docker service inspect `<service>`\
+docker inspect `<task>`\
+docker inspect `<container>`\
 docker logs `<container>`
 
 50. How to update metadata about a node?
@@ -273,7 +273,7 @@ you can use labels to add metadata about the node
 51. How to add a label to the node?
 
 docker node update --label-add foo worker1
-// add multiple labels
+// add multiple labels\
 docker node update --label-add foo --label-add bar worker1
 
 52. How to remove the label from the node?
@@ -283,7 +283,7 @@ docker node update --label-rm foo worker1
 53. How to limit your service on particular nodes?
 
 --constraint
-// example: the following limits tasks for the redis service to nodes where the node type label equals queue
+// example: the following limits tasks for the redis service to nodes where the node type label equals queue\
 docker service create \
   --name redis_2 \
   --constraint 'node.labels.type == queue' \
@@ -295,8 +295,8 @@ Raft Consensus Algorithm
 
 55. What is a quorum and why it is important?
 
-Quorun ensure that the cluster state stays consistent in the presence of failures by requiring a majority of nodes to agree on values.
-Raft tolerates up to (N-1)/2 failures and requires a majority or quorum of (N/2)+1 members to agree on values proposed to the cluster.
+Quorun ensure that the cluster state stays consistent in the presence of failures by requiring a majority of nodes to agree on values.\
+Raft tolerates up to (N-1)/2 failures and requires a majority or quorum of (N/2)+1 members to agree on values proposed to the cluster.\
 without quorun swarm wont be able to serve the requests
 
 56. What are the supported flags for creating services with templates?
@@ -304,7 +304,7 @@ without quorun swarm wont be able to serve the requests
 --env
 --mount
 --hostname
-// example
+// example\
 service create --name hosttempl \
     --hostname="{{.Node.Hostname}}-{{.Node.ID}}-{{.Service.Name}}"\
       busybox top
@@ -320,7 +320,7 @@ No. ARG is the only instruction can precede FROM
 
 59. What are the two forms for the RUN instruction?
 
-shell form: RUN `<command>`
+shell form: RUN `<command>`\
 exec form: RUN ["executable", "param1", "param2"]
 
 60. What does the RUN instruction do in the Dockerfile?
@@ -329,7 +329,7 @@ The RUN instruction will execute any commands in a new layer on top of the curre
 
 61. The RUN command normally utilizes cache from the previous build. Which flag should you specify for the build not to use cache?
 
---no-cache
+--no-cache\
 docker build --no-cache .
 
 62. Is there any other instruction that can invalidate the cache?
@@ -372,7 +372,7 @@ use -p flag when running a container
 
 71. What is the purpose of the ENV instruction in the Dockerfile?
 
-ENV `<key>` `<value>`
+ENV `<key>` `<value>`\
 an ENV instruction sets the enviroment value to the key and it is available for the subsequent build steps and in the running container as well.
 
 72. How to change the environment variables when running containers?
@@ -381,14 +381,14 @@ docker run --env `<key>`=`<value>`
 
 73. What is the difference between ADD and COPY instructions?
 
-ADD [--chown=`<user>`:`<group>`] `<src>`... `<dest>`
-The ADD instruction copies new files, directories or remote file URLs from `<src>` and adds them to the filesystem of the image at the path `<dest>`.
-COPY [--chown=`<user>`:`<group>`] `<src>`... `<dest>`
+ADD [--chown=`<user>`:`<group>`] `<src>`... `<dest>`\
+The ADD instruction copies new files, directories or remote file URLs from `<src>` and adds them to the filesystem of the image at the path `<dest>`.\
+COPY [--chown=`<user>`:`<group>`] `<src>`... `<dest>`\
 The COPY instruction copies new files or directories from `<src>` and adds them to the filesystem of the container at the path `<dest>`.
 
 74. What is ENTRYPOINT instruction in the Dockerfile?
 
-An ENTRYPOINT allows you to configure a container that will run as an executable.
+An ENTRYPOINT allows you to configure a container that will run as an executable.\
 Command line arguments to docker run `<image>` will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using CMD.
 
 75. How can you override the ENTRYPOINT instruction?
@@ -413,18 +413,18 @@ The WORKDIR instruction sets the working directory for any RUN, CMD, ENTRYPOINT,
 
 80. You have specified multiple WORKDIR instructions in the Dockerfile what is the result WORKDIR?
 
-WORKDIR /a
-WORKDIR b
-WORKDIR c
-RUN pwd
+WORKDIR /a\
+WORKDIR b\
+WORKDIR c\
+RUN pwd\
 result: /a/b/c
 
 81. You have specified multiple WORKDIR instructions in the Dockerfile what is the result WORKDIR?
 
-WORKDIR /a
-WORKDIR /b
-WORKDIR c
-RUN pwd
+WORKDIR /a\
+WORKDIR /b\
+WORKDIR c\
+RUN pwd\
 result: /b/c
 
 82. What is the ARG instruction in the Dockerfile?
@@ -469,9 +469,9 @@ Multi Stage Builds
 
 91. How do you minimize the number of layers while building the image?
 
-Only the instructions RUN, COPY, ADD create layers.
-Where possible, use multi-stage builds, and only copy the artifacts you need into the final image.
-sort multi line arguments
+Only the instructions RUN, COPY, ADD create layers.\
+Where possible, use multi-stage builds, and only copy the artifacts you need into the final image.\
+sort multi line arguments\
 RUN apt-get update && apt-get install -y \
   bzr \
   cvs \
@@ -494,16 +494,16 @@ docker image history
 95. How to format the output of the docker inspect command?
 
 by using --format flag
-//examples
-docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID
+//examples\
+docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID\
 docker inspect --format='{{.LogPath}}' $INSTANCE_ID
 
 96. How to tag an image?
 
 docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
-docker tag 0e5574283393 fedora/httpd:version1.0 // by id
-docker tag httpd fedora/httpd:version1.0 // by name
-docker tag httpd:test fedora/httpd:version1.0.test // by name and tag
+docker tag 0e5574283393 fedora/httpd:version1.0 // by id\
+docker tag httpd fedora/httpd:version1.0 // by name\
+docker tag httpd:test fedora/httpd:version1.0.test // by name and tag\
 docker tag 0e5574283393 myregistryhost:5000/fedora/httpd:version1.0
 
 97. How to run a local registry?
@@ -512,11 +512,11 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 98. How to copy an image from the docker hub to a local repository?
 
-// pull an image from the Docker Hub
+// pull an image from the Docker Hub\
 docker pull ubuntu
-// tag an image
+// tag an image\
 docker tag ubuntu:16.04 localhost:5000/my-ubuntu
-// push the image
+// push the image\
 docker push localhost:5000/my-ubuntu
 
 99. How to stop and remove a local registry?
@@ -530,16 +530,16 @@ docker image inspect //under Layers section
 101. How to create a Docker image from archive or stdin?
 
 docker image load
-// example
+// example\
 docker image load -i example.tar
 
 102. How to modify an image to a single layer?
 
 // take any multiple layer image
-// run the container
-docker export `<container>` > single-layer.tar
+// run the container\
+docker export `<container>` > single-layer.tar\
 docker import /path/to/single-layer.tar
-// check the history
+// check the history\
 docker image history
 
 103. Each layer is only a set of differences from the layer before it. The layers are stacked on top of each other. Is this statement about the image correct?
@@ -556,18 +556,18 @@ Copy-on-write is a strategy of sharing and copying files for maximum efficiency.
 
 106. How to customize the registry while deploying?
 
-// customize published port
+// customize published port\
 docker run -d \
   -p 5001:5000 \
   --name registry-test \
   registry:2
-// If you want to change the port the registry listens on within the container
+// If you want to change the port the registry listens on within the container\
 docker run -d \
   -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 \
   -p 5001:5001 \
   --name registry-test \
   registry:2
-// storage customization
+// storage customization\
 docker run -d \
   -p 5000:5000 \
   --restart=always \
@@ -578,12 +578,12 @@ docker run -d \
 107. How to configure a registry?
 
 The Registry configuration is based on a YAML file. you can specify a configuration variable from the environment by passing -e arguments to your docker run stanza or from within a Dockerfile using the ENV instruction.
-// for example you have a configuration like this for root directory
+// for example you have a configuration like this for root directory\
 storage:
   filesystem:
     rootdirectory: /var/lib/registry
-// you can create environment variable like this
-REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/somewhere
+// you can create environment variable like this\
+REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/somewhere\
 it will change from /var/lib/registry to /somewhere
 
 108. What is the location of the registry configuration file?
@@ -625,14 +625,14 @@ docker push `<dtr-domain>`/`<repository>`/`<image>`:`<tag>`
 116. How to pull an image from the repository?
 
 docker pull [OPTIONS] NAME[:TAG|@DIGEST]
-// pulling from docker hub by default
+// pulling from docker hub by default\
 docker pull debian
-// pulling from other repositories
+// pulling from other repositories\
 docker pull myregistry.local:5000/testing/test-image
 
 117. How to pull an image with multiple images?
 
--a or --all-tags
+-a or --all-tags\
 docker pull --all-tags fedora
 
 118. How to remove all images which are not used by existing containers?
@@ -641,7 +641,7 @@ docker image prune -a
 
 119. How to limit the scope when pruning images?
 
-by uisng --filter flag
+by uisng --filter flag\
 docker image prune -a --filter "until=24h"
 
 120. How to remove an image?
@@ -654,24 +654,24 @@ docker rmi --no-prune `<IMAGE ID>`
 
 122. How to delete an image from the repository?
 
-login into DTR web UI
-go to the TAGS section delete the specific TAG
+login into DTR web UI\
+go to the TAGS section delete the specific TAG\
 you can also delete all images by deleting the entire repository
 
 
 123. What is the recommended way of installing Docker
 
-set up docker repositories
+set up docker repositories\
 install from them for the ease of installation and upgrade tasks.
 
 124. How to upgrade docker-engine?
 
-sudo apt-get update
+sudo apt-get update\
 install docker from the instructions from here
 
 125. How to uninstall docker?
 
-sudo apt-get purge docker-ce
+sudo apt-get purge docker-ce\
 sudo rm -rf /var/lib/docker
 
 126. Are Images, containers, volumes, or customized configuration files on your host are not automatically removed when you uninstall docker?
@@ -690,7 +690,7 @@ sudo usermod -aG docker your-user
 
 129. How to install Docker CE on Centos?
 
-// uninstall older versions
+// uninstall older versions\
 sudo yum remove docker \
                 docker-client \
                 docker-client-latest \
@@ -699,50 +699,50 @@ sudo yum remove docker \
                 docker-latest-logrotate \
                 docker-logrotate \
                 docker-engine
-// install required libs
+// install required libs\
 sudo yum install -y yum-utils \
   device-mapper-persistent-data \
   lvm2
-// set up the stable repo
+// set up the stable repo\
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
-// install
+// install\
 sudo yum install docker-ce docker-ce-cli containerd.io
-// if you want to install specific versions
+// if you want to install specific versions\
 sudo yum install docker-ce-`<VERSION_STRING>` docker-ce-cli-`<VERSION_STRING>` containerd.io
-// start docker
+// start docker\
 sudo systemctl start docker
 
 130. How to install Docker CE on Debian?
 
-// uninstall older versions
+// uninstall older versions\
 sudo apt-get remove docker docker-engine docker.io containerd runc
-// update
+// update\
 sudo apt-get update
-// install required
+// install required\
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
     gnupg2 \
     software-properties-common
-// add dockers official gpg key
+// add dockers official gpg key\
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-// set up stable repo
+// set up stable repo\
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/debian \
    $(lsb_release -cs) \
    stable"
-// update and install
-sudo apt-get update
+// update and install\
+sudo apt-get update\
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-// if you want to install specific versions
+// if you want to install specific versions\
 sudo apt-get install docker-ce=`<VERSION_STRING>` docker-ce-cli=`<VERSION_STRING>` containerd.io
 
 131. How to install Docker CE on Fedora?
 
-// uninstall old versions
+// uninstall old versions\
 sudo dnf remove docker \
                 docker-client \
                 docker-client-latest \
@@ -753,42 +753,42 @@ sudo dnf remove docker \
                 docker-selinux \
                 docker-engine-selinux \
                 docker-engine
-// install required packages
+// install required packages\
 sudo dnf -y install dnf-plugins-core
-// add the stable repo
+// add the stable repo\
 sudo dnf config-manager \
     --add-repo \
     https://download.docker.com/linux/fedora/docker-ce.repo
-// install community version
+// install community version\
 sudo dnf install docker-ce docker-ce-cli containerd.io
-// if you want specific versions
+// if you want specific versions\
 sudo dnf -y install docker-ce-`<VERSION_STRING>` docker-ce-cli-`<VERSION_STRING>` containerd.io
-// start docker
+// start docker\
 sudo systemctl start docker
 
 132. How to install Docker CE on Ubuntu?
 
-// uninstall old versions
+// uninstall old versions\
 sudo apt-get remove docker docker-engine docker.io containerd runc
-// update and install required packages
-sudo apt-get update
+// update and install required packages\
+sudo apt-get update\
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
     gnupg-agent \
     software-properties-common
-// add official gpg key
+// add official gpg key\
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-// stable repo
+// stable repo\
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
-// update and install
-sudo apt-get update
+// update and install\
+sudo apt-get update\
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-// if you want specific versions
+// if you want specific versions\
 sudo apt-get install docker-ce=`<VERSION_STRING>` docker-ce-cli=`<VERSION_STRING>` containerd.io
 
 133. What are the recommended storage drivers on different distributions?
@@ -798,8 +798,8 @@ Ubuntu supports overlay2, aufs and btrfs storage drivers. Overlay2 is the defaul
 
 134. What are all the release channels that Docker CE supports?
 
-Stable gives you latest releases for general availability.
-Test gives pre-releases that are ready for testing before general availability.
+Stable gives you latest releases for general availability.\
+Test gives pre-releases that are ready for testing before general availability.\
 Nightly gives you latest builds of work in progress for the next major release.
 
 135. Where are the Docker-CE binaries available?
@@ -848,8 +848,8 @@ docker run -it --log-driver json-file --log-opt max-size=10m alpine ash
 
 143. What are the available logging drivers for the Docker CE edition?
 
-json-file
-local
+json-file\
+local\
 journald
 
 144. If the swarm loses the quorum of managers it loses the ability to perform management tasks. Is this statement correct?
@@ -910,7 +910,7 @@ Yes. You must ensure that there is a quorum
 * shut down the docker on the targeted machine
 * Remove the contents of /var/lib/docker/swarm
 * Restore the /var/lib/docker/swarm directory from the backup
-* Start the docker on the node so that it doesn't connect to old ones
+* Start the docker on the node so that it doesn't connect to old ones\
 docker swarm init --force-new-cluster
 * Verify the state of the swarm docker service ls
 * rotate the autolock key
@@ -923,13 +923,13 @@ A team defines the permissions a set of users have for a set of repositories.
 
 157. What are all the permission levels that teams could have?
 
-Read Only: View repository and pull images.
-Read Write: View repository, pull and push images.
+Read Only: View repository and pull images.\
+Read Write: View repository, pull and push images.\
 Admin: Manage repository and change its settings, pull and push images.
 
 158. Where is the Docker daemon directory?
 
-/var/lib/docker on Linux
+/var/lib/docker on Linux\
 C:\ProgramData\docker on Windows
 
 159. How to enable the debugging on Docker daemon
@@ -938,15 +938,15 @@ C:\ProgramData\docker on Windows
 {
   "debug": true
 }
-* Send a HUP signal to the daemon to cause it to reload its configuration.
+* Send a HUP signal to the daemon to cause it to reload its configuration.\
 sudo kill -SIGHUP $(pidof dockerd)
 
 160. How to check whether Docker is running?
 
-// all these can be used depending on the operating system
-docker info
-sudo systemctl is-active docker
-sudo status docker
+// all these can be used depending on the operating system\
+docker info\
+sudo systemctl is-active docker\
+sudo status docker\
 sudo service docker status
 
 161. What are the hardware and software requirements for UCP?
@@ -954,7 +954,7 @@ sudo service docker status
 Minimum
 * 8GB of RAM for manager nodes or nodes running DTR
 * 4GB of RAM for worker nodes
-* 3GB of free disk space
+* 3GB of free disk space\
 Recommended
 * 16GB of RAM for manager nodes or nodes running DTR
 * 4 vCPUs for manager nodes or nodes running DTR
@@ -962,8 +962,8 @@ Recommended
 
 162. What products that Docker EE contains?
 
-UCP
-DTR
+UCP\
+DTR\
 Docker Engine with enterprise-grade support,
 
 163. Where is the location of the custom certificates?
@@ -981,7 +981,7 @@ Yes
 
 166. How to backup the UCP
 
-To create a UCP backup, run the docker/ucp:2.2.22 backup command on a single UCP manager
+To create a UCP backup, run the docker/ucp:2.2.22 backup command on a single UCP manager\
 docker container run \
   --log-driver none --rm \
   --interactive \
@@ -1025,7 +1025,7 @@ docker netwrok ls
 
 174. How to connect to the default bridge network when you create a container?
 
-// since no network is specified, it will be connected to default bridge network
+// since no network is specified, it will be connected to default bridge network\
 docker run -dit --name alpine1 alpine ash
 
 175. How to inspect the default network bridge?
@@ -1054,7 +1054,7 @@ docker netwrok connect my-network alpine2
 
 181. How to troubleshoot a user-defined network?
 
-// using  nicolaka/netshoot
+// using  nicolaka/netshoot\
 docker run -it --rm --network container:`<container_name>` nicolaka/netshoot
 
 182. How to publish a port so that it can be accessed externally?
@@ -1063,25 +1063,25 @@ docker run -p 127.0.0.1:$HOSTPORT:$CONTAINERPORT --name CONTAINER -t `<image>`
 
 183. How to list port mappings or a specific mapping for the container?
 
-// List the containers
+// List the containers\
 docker ps
-// use this command with container name
+// use this command with container name\
 docker port `<CONTAINER NAME>`
-// USE the specific port
+// USE the specific port\
 docker port `<CONTAINER NAME>` `<specific port>`
 
 184. What are all the different built-in network drivers?
 
-Bridge Network Driver
-Overlay Network Driver
-MACVLAN Driver
-Host
+Bridge Network Driver\
+Overlay Network Driver\
+MACVLAN Driver\
+Host\
 None
 
 185. What are the Bridge network and its use case?
 
-The bridge driver creates a private network internal to the host so containers on this network can communicate.
-The bridge driver does the service discovery for us automatically if two containers are on the same network
+The bridge driver creates a private network internal to the host so containers on this network can communicate.\
+The bridge driver does the service discovery for us automatically if two containers are on the same network\
 The bridge driver is a local scope driver, which means it only provides service discovery, IPAM, and connectivity on a single host.
 
 186. What is the scope of the bridge network?
@@ -1090,7 +1090,7 @@ local
 
 187. What are the Overlay network and their use case?
 
-The built-in Docker overlay network driver radically simplifies many of the complexities in multi-host networking.
+The built-in Docker overlay network driver radically simplifies many of the complexities in multi-host networking.\
 It is a swarm scope driver, which means that it operates across an entire Swarm or UCP cluster rather than individual hosts.
 
 188. What is the scope of the overlay network?
@@ -1099,7 +1099,7 @@ swarm
 
 189. What are the MACVLAN network and their use case?
 
-The macvlan driver is the newest built-in network driver and offers several unique characteristics.
+The macvlan driver is the newest built-in network driver and offers several unique characteristics.\
 It’s a very lightweight driver, because rather than using any Linux bridging or port mapping, it connects container interfaces directly to host interfaces.
 
 190. What is the scope of the macvlan network?
@@ -1152,7 +1152,7 @@ edit the /etc/docker/daemon.json
 {
    "dns": ["10.0.0.2", "8.8.8.8"]
 }
-restart the docker
+restart the docker\
 sudo systemctl docker restart
 
 202. Which network should handles control and data traffic related to swarm services?
@@ -1173,7 +1173,7 @@ docker network create -d overlay my-overlay
 
 206. How to create an overlay network which can be used by swarm services or standalone containers to communicate with other standalone containers running on other Docker daemons?
 
-create with --attachable flag
+create with --attachable flag\
 docker network create -d overlay --attachable my-attachable-overlay
 
 207. All the swarm management data is encrypted by default. Is this statement correct?
@@ -1186,7 +1186,7 @@ No
 
 209. How to encrypt application data as well on the swarm?
 
-// use --opt=encrypted
+// use --opt=encrypted\
 docker network create --opt encrypted --driver overlay --attachable my-attachable-multi-host-network
 
 210. What is the host port publishing mode?
@@ -1285,13 +1285,13 @@ docker info
 
 233. How do you configure device-mapper?
 
-// stop docker
+// stop docker\
 sudo systemctl stop docker
 // set the device-mapper in /etc/docker/daemon.json file
 {
   "storage-driver": "devicemapper"
 }
-//start docker
+//start docker\
 sudo systemctl start docker
 
 234. what is the option that sets the direct-lvm for production device-mapper?
@@ -1314,8 +1314,8 @@ dm.directlvm_device
 
 236. What are the different available storage options available for containers?
 
-Block Storage
-FiLE System Storage
+Block Storage\
+FiLE System Storage\
 Object Storage
 
 237. Do containers create a writable layer on top of Image read-only layers?
@@ -1328,7 +1328,7 @@ Yes
 
 239. What is the difference between bind mounts and volumes?
 
-Volumes are completely managed by docker
+Volumes are completely managed by docker\
 Bind Mounts are dependent on the host directory structure
 
 240. Volumes don’t increase the size of the containers. Is this statement correct and why?
@@ -1368,7 +1368,7 @@ docker run -d \
 
 248. How to verify the volume is created with the container?
 
-// Look for the mounts section
+// Look for the mounts section\
 docker inspect devtest
 
 249. How to create a volume with the --mount flag?
@@ -1385,7 +1385,7 @@ docker system prune --all
 251. How to set up the service to divide tasks evenly over different categories of nodes?
 
 --placement-pref
-// example: if we have three datacenters 3 replicas will be placed on each datacenter
+// example: if we have three datacenters 3 replicas will be placed on each datacenter\
 docker service create \
   --replicas 9 \
   --name redis_2 \
