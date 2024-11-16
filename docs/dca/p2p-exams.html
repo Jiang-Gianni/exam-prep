@@ -104,7 +104,7 @@ containers unless overridden by the <code>--log-driver</code> option.</p>
 <ul>
 <li><a href="https://docs.docker.com/engine/swarm/">https://docs.docker.com/engine/swarm/</a></li>
 </ul>
-<p>The statement doesnotdescribe a node in the context of a swarm mode cluster. A node is a
+<p>The statement does not describe a node in the context of a swarm mode cluster. A node is a
 physical or virtual machine running Docker Engine 1.12 or later in swarm mode. An instance of
 the Docker CLI connected to the swarm is not a node, but a client that can interact with the
 swarm through the Docker API. The Docker CLI can be used to create a swarm, join nodes to a
@@ -155,7 +155,7 @@ options. A Dockerfile is a text document that contains all the commands a user c
 command line to assemble an image. A Dockerfile is used to build images, not to configure the
 Docker daemon. The Docker daemon's configuration options are stored in a JSON file, which is
 usually located at <code>/etc/docker/daemon.json</code> on Linux systems, or
-<code>C:\ProgramData\docker\config\daemon.json</code> on Windows2.The JSON file allows you to customize
+<code>C:\ProgramData\docker\config\daemon.json</code> on Windows. The JSON file allows you to customize
 the Docker daemon's behavior, such as enabling debug mode, setting TLS certificates, or
 changing the data directory.</p>
 </article>
@@ -366,6 +366,1115 @@ secrets in container images or file systems. SecretScanner can match the content
 against a database of approximately 140 secret types, including private keys. Therefore, if an
 image contains private keys, DTR security scan will report them as potential secrets and alert the
 user to remove them from the image.</p>
+</article>
+</details>
+<ol start="17">
+<li>You created a new service named 'http* and discover it is not registering as healthy. Will this command enable you to view the list of historical tasks for this service? Solution. <code>docker inspect http</code></li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/30441035/how-to-find-the-cmd-command-of-a-docker-image">https://stackoverflow.com/questions/30441035/how-to-find-the-cmd-command-of-a-docker-image</a></li>
+<li><a href="https://docs.docker.com/reference/cli/docker/inspect/">https://docs.docker.com/reference/cli/docker/inspect/</a></li>
+</ul>
+<p>The command <code>docker inspect http</code> will not enable you to view the list of historical tasks for the
+service. The <code>docker inspect</code> command returns low-level information on Docker objects, such as
+containers, images, networks, or volumes. It does not work on services, which are higher-level
+objects that define the desired state of a set of tasks. To view the list of historical tasks for a
+service, you need to use the <code>docker service ps</code> command, which shows the current and previous
+states of each task, as well as the node, error, and ports.</p>
+</article>
+</details>
+<ol start="18">
+<li>In Kubernetes, to mount external storage to a filesystem path in a container within a pod, you would use a volume in the pod specification. This volume is populated with a persistentVolumeClaim that is bound to an existing persistentVolume. The persistentVolume is defined and managed by the storageClass which provides dynamic or static provisioning of the volume and determines what type of storage will be provided. Is this a supported user authentication method for Universal Control Plane? Solution: Docker ID</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>Docker Universal Control Plane (UCP) has its own built-in authentication mechanism and
+integrates with LDAP services. It also has role-based access control (RBAC), so that you can
+control who can access and make changes to your cluster and applications. However, there is
+no mention of Docker ID being a supported user authentication method for UCP in the resources
+provided</p>
+</article>
+</details>
+<ol start="19">
+<li>Are these conditions sufficient for Kubernetes to dynamically provision a persistentVolume, assuming there are no limitations on the amount and type of available external storage? Solution: A persistentVolumeClaim is created that specifies a pre-defined storageClass</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/">https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/</a></li>
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes">https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes</a></li>
+<li><a href="https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/">https://kubernetes.io/blog/2017/03/dynamic-provisioning-and-storage-classes-kubernetes/</a></li>
+</ul>
+<p>The conditions are sufficient for Kubernetes to dynamically provision a persistentVolume,
+because a storageClass defines the provisioner and parameters for creating a volume ondemand. A persistentVolumeClaim that specifies a storageClass triggers the dynamic
+provisioning process, and Kubernetes will automatically create and bind a persistentVolume that
+matches the request. This eliminates the need for manual intervention by cluster administrators
+to provision storage volumes</p>
+</article>
+</details>
+<ol start="20">
+<li>Will this Linux kernel facility limit a Docker container's access to host resources, such as CPU or memory? Solution. capabilities</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://dockerlabs.collabnix.com/advanced/security/capabilities/">https://dockerlabs.collabnix.com/advanced/security/capabilities/</a></li>
+<li><a href="https://docs.docker.com/engine/containers/run/">https://docs.docker.com/engine/containers/run/</a></li>
+<li><a href="https://raesene.github.io/blog/2019/06/01/docker-capabilities-and-no-new-privs/">https://raesene.github.io/blog/2019/06/01/docker-capabilities-and-no-new-privs/</a></li>
+<li><a href="https://www.docker.com/resources/what-container/">https://www.docker.com/resources/what-container/</a></li>
+</ul>
+<p>Capabilities are a Linux kernel feature that allows processes to perform some privileged
+operations without having the full power of the root user. Docker uses capabilities to limit the
+access of containers to host resources, such as CPU or memory. By default, Docker drops all
+capabilities except those needed for the container to function properly, using a whitelist
+approach. This reduces the risk of a container compromising the host system or other
+containers. You can also add or remove capabilities to or from a container at runtime, using the <code>--cap-add</code> or <code>--cap-drop</code> options of the <code>docker run</code> command. This gives you more control over the
+security and functionality of your containers</p>
+</article>
+</details>
+<ol start="21">
+<li>Will this command list all nodes in a swarm cluster from the command line? Solution. <code>docker inspect nodes</code></li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/swarm/manage-nodes/">https://docs.docker.com/engine/swarm/manage-nodes/</a></li>
+<li><a href="https://stackoverflow.com/questions/56665081/how-to-list-swarm-mode-nodes">https://stackoverflow.com/questions/56665081/how-to-list-swarm-mode-nodes</a></li>
+</ul>
+<p>The command <code>docker inspect nodes</code> will not list all nodes in a swarm cluster from the command
+line. This command is invalid, as <code>docker inspect</code> requires one or more object names or IDs as
+arguments. To list all nodes in a swarm cluster, you need to use the <code>docker node ls</code> command
+from a manager node. This command will display the ID, hostname, status, availability, manager
+status, and engine version of each node in the swarm. You can also use the <code>-for--filter</code> flag to filter the nodes by various criteria, such as role, label, or name</p>
+</article>
+</details>
+<ol start="22">
+<li>In Docker Trusted Registry, is this how a user can prevent an image, such as <code>nginx:latest</code>, from being overwritten by another user with push access to the repository? Solution: Tag the image with <code>nginx:immutable</code></li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/66864753/redirecting-to-docker-registry-with-nginx">https://stackoverflow.com/questions/66864753/redirecting-to-docker-registry-with-nginx</a></li>
+</ul>
+<p>Tagging the image with <code>nginx:immutable</code> isnothow a user can prevent an image, such as
+<code>nginx:latest</code>, from being overwritten by another user with push access to the repository. Tagging
+the image with <code>nginx:immutable</code> will only create a new tag for the image, but it will not prevent
+the original tag from being overwritten.To prevent an image tag from being overwritten in Docker
+Trusted Registry, the user can use the DTR web UI to make the tag immutable. This will prevent
+anyone from pushing a new image with the same tag, even if they have push access to the
+repository. Alternatively, the user can also use the DTR API to make the tag
+immutable.</p>
+</article>
+</details>
+<ol start="23">
+<li>Which one of the following commands will show a list of volumes for a specific container?</li>
+</ol>
+<p>A) docker container logs nginx --volumes</p>
+<p  class="correct" >B) docker container inspect nginx</p>
+<p>C) docker volume inspect nginx</p>
+<p>D) docker volume logs nginx --containers</p>
+<ol start="24">
+<li>Which of the following commands wifi automatically create a volume when a container is started?</li>
+</ol>
+<p  class="correct" >A) docker container run --name nginxtest --volumes=/app nginx</p>
+<p>B) docker container run --name nginxtest -v /app:mount nginx</p>
+<p>C) docker container run --name nginxtest --volumes myvol:/app:new nginx</p>
+<p>D) docker container run --name nginxtest -v myvol:/app nginx</p>
+<ol start="25">
+<li>Which of the following constitutes a production-ready device mapper configuration for the Docker engine?</li>
+</ol>
+<p>A) Create a volume group in devicemapper and utilize the '--dm.thinpooldev' Docker daemon option, specifying the volume group</p>
+<p>B) Format a partition with xfs and mount it at '/var/lib/docker'</p>
+<p  class="correct" >C) Utilize the '--storage-opt dm.directlvm_device' Docker daemon option, specifying a block device</p>
+<p>D) Nothing, devicemapper comes ready for production usage out of the box</p>
+<ol start="26">
+<li>Which one of the following commands will result in the volume being removed automatically once the container has exited?</li>
+</ol>
+<p>A) 'docker run --del -v /foo busybox'</p>
+<p>B) 'docker run --read-only -v /foo busybox'</p>
+<p  class="correct" >C) 'docker run --rm -v /foo busybox'</p>
+<p>D) 'docker run --remove -v /foo busybox'</p>
+<ol start="27">
+<li>A server is running low on disk space. What command can be used to check the disk usage of images, containers, and volumes for Docker engine?</li>
+</ol>
+<p  class="correct" >A) 'docker system df'</p>
+<p>B) 'docker system prune'</p>
+<p>C) 'docker system free'</p>
+<p>D) 'docker system ps'</p>
+<ol start="28">
+<li>Which of the following statements is true about secrets?</li>
+</ol>
+<p>A) Secrets can be created from any node in the cluster.</p>
+<p>B) Secrets can be modified after they are created.</p>
+<p>C) Secret are stored unencrypted on manager nodes.</p>
+<p  class="correct" >D) Secrets can be created using standard input (STDIN) and a file.</p>
+<ol start="29">
+<li>Which of the following namespaces is disabled by default and must be enabled at Docker engine runtime in order to be used?</li>
+</ol>
+<p  class="correct" >A) user</p>
+<p>B) pid</p>
+<p>C) net</p>
+<p>D) mnt</p>
+<ol start="30">
+<li>Which of the following are types of namespaces used by Docker to provide isolation? (Choose 2.)</li>
+</ol>
+<p>A) Host</p>
+<p  class="correct" >B) Network</p>
+<p  class="correct" >C) Process ID</p>
+<p>D) Authentication</p>
+<p>E) Storage</p>
+<ol start="31">
+<li>Will a DTR security scan detect this? Solution. image configuration poor practices, such as exposed ports or inclusion of compilers in production images</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://faun.pub/container-security-101-scanning-images-for-vulnerabilities-28391ee7170e">https://faun.pub/container-security-101-scanning-images-for-vulnerabilities-28391ee7170e</a></li>
+</ul>
+<p>A DTR security scan willnotdetect image configuration poor practices, such as exposed ports or
+inclusion of compilers in production images.A DTR security scan is designed to discover
+vulnerabilities in the images based on the MITRE CVE or NIST NVD databases. It does not check
+the image configuration or best practices. To check the image configuration and best practices,
+you can use other tools, such as Dockerfile Linter or Docker Bench for Security.</p>
+</article>
+</details>
+<ol start="32">
+<li>In Docker Trusted Registry, is this how a user can prevent an image, such as <code>nginx:latest</code>, from being overwritten by another user with push access to the repository? Solution: Remove push access from all other users.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>While removing push access from all other users can prevent an image from being overwritten,
+it's not the only way and might not be the most efficient or practical solution, especially in a
+collaborative environment. Docker Trusted Registry (DTR) provides a feature called 'Immutable
+Tags' which can be used to prevent an image, such as 'nginx:latest', from being overwritten.
+Once a tag is marked as immutable, DTR will prevent any user from pushing the same tag to the
+repository, thus preserving the image. This allows for better version control and prevents
+accidental overwrites. Therefore, the solution to prevent an image from being overwritten is not
+just to remove push access from all other users, but to use the features provided by DTR like
+'Immutable Tags'.</p>
+</article>
+</details>
+<ol start="33">
+<li>Does this describe the role of Control Groups (cgroups) when used with a Docker container? Solution: isolation between resources used by containers</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://dockerlabs.collabnix.com/advanced/security/cgroups/">https://dockerlabs.collabnix.com/advanced/security/cgroups/</a></li>
+<li><a href="https://stackoverflow.com/questions/34820558/difference-between-cgroups-and-namespaces">https://stackoverflow.com/questions/34820558/difference-between-cgroups-and-namespaces</a></li>
+</ul>
+<p>Control Groups (cgroups) are a Linux kernel feature that allow you to limit, modify, or allocate
+resources as needed. Docker uses cgroups to isolate the resources used by containers, such as
+CPU, memory, disk I/O, network, etc. This means that each container can have its own set of
+resource limits and constraints, and that the containers cannot interfere with each other or with
+the host system. This improves the security, performance, and reliability of the containers and
+the system as a whole.</p>
+</article>
+</details>
+<ol start="34">
+<li>The Kubernetes yaml shown below describes a networkPolicy. Will the networkPolicy BLOCK this trafftc? Solution. a request issued from a pod bearing the tier: api label, to a pod bearing the tier: backend label</li>
+</ol>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">NetworkPolicy</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">dca</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>    <span style="color:#58a1dd">namespace</span>: <span style="color:#a6be9d">default</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>    <span style="color:#58a1dd">podSelector</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>        <span style="color:#58a1dd">matcheLabels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span>            <span style="color:#58a1dd">tier</span>: <span style="color:#a6be9d">backend</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>    <span style="color:#58a1dd">ingress</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>    -   <span style="color:#58a1dd">from</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>        -   <span style="color:#58a1dd">podSelector</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>                <span style="color:#58a1dd">matchLabels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">14</span><span>                    <span style="color:#58a1dd">tier</span>: <span style="color:#a6be9d">api</span>
+</span></span></code></pre><p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">https://kubernetes.io/docs/concepts/services-networking/network-policies/</a></li>
+</ul>
+<p>The provided Kubernetes NetworkPolicy YAML configuration indicates that the policy applies to
+pods with the label tier: backend in the default namespace. The ingress rule allows traffic from
+pods with the label tier: api. Therefore, a request issued from a pod bearing the tier: api label to
+a pod bearing the tier: backend label will not be blocked by this networkPolicy. This is because
+the networkPolicy explicitly allows ingress from pods with the tier: api label</p>
+</article>
+</details>
+<ol start="35">
+<li>Are these conditions sufficient for Kubernetes to dynamically provision a persistentVolume, assuming there are no limitations on the amount and type of available external storage? Solution: A persistentVolumeClaim is created that specifies a pre-defined provisioner</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>The creation of a persistentVolumeClaim with a specified pre-defined provisioner is not sufficient
+for Kubernetes to dynamically provision a persistentVolume. There are other factors and
+configurations that need to be considered and set up, such as storage classes and the
+appropriate storage provisioner configurations. A persistentVolumeClaim is a request for storage
+by a user, which can be automatically bound to a suitable persistentVolume if one exists or
+dynamically provisioned if one does not exist. A provisioner is a plugin that creates volumes on
+demand. A pre-defined provisioner is a provisioner that is built-in or registered with Kubernetes,
+such as aws-ebs, gce-pd, azure-disk, etc. However, simply specifying a pre-defined provisioner
+in a persistentVolumeClaim is not enough to trigger dynamic provisioning.You also need to have
+a storage class that defines the type of storage and the provisioner to use. A storage class is a
+way of describing different classes or tiers of storage that are available in the cluster. You can
+create a storage class with a pre-defined provisioner, or use a default storage class that is
+automatically created by the cluster. You can also specify parameters for the provisioner, such
+as the type, size, zone, etc.of the volume to be created. To use a storage class for dynamic
+provisioning, you need to reference it in the persistentVolumeClaim by name, or use the special
+value '''' to use the default storage class. Therefore, to enable dynamic provisioning, you need to
+have both a persistentVolumeClaim that requests a storage class and a storage class that defines
+a provisioner</p>
+</article>
+</details>
+<ol start="36">
+<li>Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate? Solution. Set and export the IGNORE_TLS environment variable on the command line.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority">https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority</a></li>
+<li><a href="https://docs.docker.com/engine/security/certificates/">https://docs.docker.com/engine/security/certificates/</a></li>
+<li><a href="https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052">https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052</a></li>
+</ul>
+<p>Setting and exporting the IGNORE_TLS environment variable on the command line is not a way
+to configure the Docker engine to use a registry without a trusted TLS certificate. This
+environment variable is not recognized by Docker and has no effect on the TLS verification
+process. To use a registry without a trusted TLS certificate, you need to either add the certificate
+to the system or Docker-specific trust store, or configure the Docker daemon to allow insecure
+registries</p>
+</article>
+</details>
+<ol start="37">
+<li>You are troubleshooting a Kubernetes deployment called api, and want to see the events table for this object. Does this command display it? Solution: <code>kubectl get deployment api</code></li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://kubernetes.io/docs/reference/kubectl/quick-reference/">https://kubernetes.io/docs/reference/kubectl/quick-reference/</a></li>
+<li><a href="https://stackoverflow.com/questions/51931113/kubectl-get-events-only-for-a-pod">https://stackoverflow.com/questions/51931113/kubectl-get-events-only-for-a-pod</a></li>
+<li><a href="https://stackoverflow.com/questions/51558156/where-does-kubectl-events-originate-from-how-do-i-export-these">https://stackoverflow.com/questions/51558156/where-does-kubectl-events-originate-from-how-do-i-export-these</a></li>
+<li><a href="https://www.shellhacks.com/kubectl-get-deployments-kubernetes/">https://www.shellhacks.com/kubectl-get-deployments-kubernetes/</a></li>
+</ul>
+<p>The command <code>kubectl get deployment api</code> will only show the status of the deployment object, such
+as the number of replicas, available pods, and updated pods. It will not display the events table
+for the deployment, which contains information about the creation, scaling, and updating of the
+deployment and its pods. To see the events table for the deployment, you need to use
+the <code>kubectl describe deployment api</code> command, which will show the details of the deployment
+object, including the events. Alternatively, you can use the <code>kubectl get events --field-selector involvedObject.name=api</code> command, which will filter the events by the name of the involved object.</p>
+</article>
+</details>
+<ol start="38">
+<li>In the context of a swarm mode cluster, does this describe a node? Solution: an instance of the Docker engine participating in the swarm</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/swarm/">https://docs.docker.com/engine/swarm/</a></li>
+<li><a href="https://docs.docker.com/engine/swarm/manage-nodes/">https://docs.docker.com/engine/swarm/manage-nodes/</a></li>
+</ul>
+<p>In the context of a swarm mode cluster, an instance of the Docker engine participating in the
+swarm is indeed a node. A node can be either a manager or a worker, depending on the role
+assigned by the swarm manager. A manager node handles the orchestration and management
+of the swarm, while a worker node executes the tasks assigned by the manager. A node can join
+or leave a swarm at any time, and the swarm manager will reconcile the desired state of the
+cluster accordingly</p>
+</article>
+</details>
+<ol start="39">
+<li>An application image runs in multiple environments, with each environment using different certificates and ports. Is this a way to provision configuration to containers at runtime? Solution. Create a Dockerfile for each environment, specifying ports and Docker secrets for certificates.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://kubernetes.io/docs/setup/production-environment/container-runtimes/">https://kubernetes.io/docs/setup/production-environment/container-runtimes/</a></li>
+<li><a href="https://kubernetes.io/blog/2016/04/configuration-management-with-containers/">https://kubernetes.io/blog/2016/04/configuration-management-with-containers/</a></li>
+<li><a href="https://www.marks4sure.com/dca-docker-certified-associate-dca-exam-questions.html">https://www.marks4sure.com/dca-docker-certified-associate-dca-exam-questions.html</a></li>
+<li><a href="https://devops.com/provisioning-vs-configuration/">https://devops.com/provisioning-vs-configuration/</a></li>
+</ul>
+<p>Creating a Dockerfile for each environment, specifying ports and Docker secrets for certificates is
+not a way to provision configuration to containers at runtime.A Dockerfile is a text document that
+contains all the commands a user could call on the command line to assemble an image. A
+Dockerfile is used to build an image, not to run a container. Once an image is built, the
+configuration specified in the Dockerfile cannot be changed at runtime.To provision configuration
+to containers at runtime, you need to use a different mechanism, such as environment variables,
+command-line arguments, or config maps</p>
+</article>
+</details>
+<ol start="40">
+<li>During development of an application meant to be orchestrated by Kubemetes, you want to mount the /data directory on your laptop into a container. Will this strategy successfully accomplish this? Solution. Create a Persistent VolumeClaim requesting storageClass:'''' (which defaults to local storage) and hostPath: /data, and use this to populate a volume in a pod.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/storage/volumes/">https://kubernetes.io/docs/concepts/storage/volumes/</a></li>
+<li><a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/">https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/</a></li>
+<li><a href="https://stackoverflow.com/questions/63548272/how-to-see-the-files-in-hostpath">https://stackoverflow.com/questions/63548272/how-to-see-the-files-in-hostpath</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">https://kubernetes.io/docs/concepts/storage/persistent-volumes/</a></li>
+</ul>
+<p>This strategy will not successfully accomplish this. A PersistentVolumeClaim (PVC) is a request
+for storage by a user that is automatically bound to a suitable PersistentVolume (PV) by
+Kubernetes. A PV is a piece of storage in the cluster that has been provisioned by an
+administrator or dynamically provisioned using StorageClasses. A hostPath is a type of volume
+that mounts a file or directory from the host node's filesystem into a pod. It is mainly used for
+development and testing on a single-node cluster, and not recommended for production use.
+The problem with this strategy is that it assumes that the hostPath /data on the node is the same
+as the /data directory on your laptop. This is not necessarily true, as the node may be a different
+machine than your laptop, or it may have a different filesystem layout. Also, the hostPath volume
+is not portable across nodes, so if your pod is scheduled on a different node, it will not have
+access to the same /data directory. Furthermore, the storageClass parameter is not applicable
+for hostPath volumes, as they are not dynamically provisioned.
+To mount the /data directory on your laptop into a container, you need to use a different type of
+volume that supports remote access, such as NFS, Ceph, or GlusterFS. You also need to make
+sure that your laptop is accessible from the cluster network and that it has the appropriate
+permissions to share the /data directory.Alternatively, you can use a tool like Skaffold or
+Telepresence to sync your local files with your cluster</p>
+</article>
+</details>
+<ol start="41">
+<li>Will this command display a list of volumes for a specific container? Solution. <code>docker container inspect nginx</code></li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/reference/cli/docker/container/inspect/">https://docs.docker.com/reference/cli/docker/container/inspect/</a></li>
+<li><a href="https://docs.docker.com/reference/cli/docker/inspect/">https://docs.docker.com/reference/cli/docker/inspect/</a></li>
+</ul>
+<p>This command will not display a list of volumes for a specific container, as it will show detailed
+information on the container itself, such as its configuration, network settings, state, and log
+path. To display a list of volumes for a specific container, you need to use the--formatoption with
+a custom template that filters the output by theMountsfield. For example, the following
+command will show the source and destination of the volumes mounted in the nginx container:</p>
+<p><code>docker container inspect --format=' { {range .Mounts}} { {.Source}} -&gt; { {.Destination}} {{end}}' nginx</code></p>
+</article>
+</details>
+<ol start="42">
+<li>Is this the purpose of Docker Content Trust? Solution. Sign and verify image tags</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/security/trust/">https://docs.docker.com/engine/security/trust/</a></li>
+<li><a href="https://www.trendmicro.com/vinfo/us/security/news/virtualization-and-cloud/docker-content-trust-what-it-is-and-how-it-secures-container-images">https://www.trendmicro.com/vinfo/us/security/news/virtualization-and-cloud/docker-content-trust-what-it-is-and-how-it-secures-container-images</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/containers/content-trust?view=azure-devops">https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/containers/content-trust?view=azure-devops</a></li>
+</ul>
+<p>The purpose of Docker Content Trust is to sign and verify image tags using digital signatures
+for data sent to and received from remote Docker registries. This allows client-side or runtime
+verification of the integrity and publisher of specific image tags, ensuring the provenance and
+security of container images</p>
+</article>
+</details>
+<ol start="43">
+<li>You want to create a container that is reachable from its host's network. Does this action accomplish this? Solution. Use either EXPOSE or -publish to access the container on the bridge network</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://www.baeldung.com/ops/docker-expose-vs-publish">https://www.baeldung.com/ops/docker-expose-vs-publish</a></li>
+<li><a href="https://betterstack.com/community/questions/what-is-the-difference-between-expose-and-publish-in-docker/">https://betterstack.com/community/questions/what-is-the-difference-between-expose-and-publish-in-docker/</a></li>
+<li><a href="https://www.devopsschool.com/blog/understanding-expose-in-dockerfile-with-example/">https://www.devopsschool.com/blog/understanding-expose-in-dockerfile-with-example/</a></li>
+<li><a href="https://stackoverflow.com/questions/40801772/what-is-the-difference-between-ports-and-expose-in-docker-compose">https://stackoverflow.com/questions/40801772/what-is-the-difference-between-ports-and-expose-in-docker-compose</a></li>
+</ul>
+<p>Using either EXPOSE or -publish to access the container on the bridge network will not
+accomplish the goal of creating a container that is reachable from its host's network. EXPOSE is a
+way of documenting which ports a container listens on, but it does not open any ports to the
+host. <code>-publish</code> (or <code>-p</code>) is a way of mapping a host port to a container port, but it does not change
+the network mode of the container. By default, Docker containers use the bridge network, which
+isolates them from the host network. To create a container that is reachable from its host's
+network, you need to use the <code>--network</code> host option when running the container. This will make
+the container share the host's network stack and have the same IP address as the host</p>
+</article>
+</details>
+<ol start="44">
+<li>Will this command mount the host's '/data* directory to the ubuntu container in read-only mode? Solution. <code>docker run -add-volume /data /mydata -read-only ubuntu</code></li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>The command <code>docker run -add-volume /data /mydata -read-only ubuntu</code> will not mount the
+host's/datadirectory to the ubuntu container in read-only mode. The reason is that the command
+has several syntax errors and invalid options.The correct command to mount a host directory to a
+container in read-only mode is <code>docker run --mount type=bind,source=/data,target=/mydata,readonly ubuntu</code>. The command <code>docker run -add-volume /data /mydata -read-only ubuntu</code> has the following problems:</p>
+<p>The option <code>-add-volume</code> is not a valid option for <code>docker run</code>. The valid options for mounting a volume
+or a bind mount are--mountor-v12.</p>
+<p>The option <code>-read-only</code> is not a valid option for <code>docker run</code>. The valid option for making the
+container's root filesystem read-only is <code>--read-only</code>. However, this option will not affect the
+mounted volumes or bind mounts, which have their own readonlyoption.</p>
+<p>The argument <code>/data /mydata</code> is not a valid argument for <code>docker run</code>. The argument for <code>dockerrun</code> should be the command to run inside the container, such as bash or ping. The source and
+target of the volume or bind mount should be specified in the <code>--mount</code> or <code>-v</code> option, separated by a
+colon.</p>
+<p>Therefore, the command <code>docker run -add-volume /data /mydata -read-only ubuntu</code> will not work as
+intended, and will likely produce an error message or an unexpected result</p>
+</article>
+</details>
+<ol start="45">
+<li>Is this a function of UCP? Solution: scans images to detect any security vulnerability</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://dockerlabs.collabnix.com/advanced/Docker-UCP-overview.html">https://dockerlabs.collabnix.com/advanced/Docker-UCP-overview.html</a></li>
+</ul>
+<p>Scanning images to detect any security vulnerability is a function of UCP. UCP integrates with
+Docker Trusted Registry (DTR), which is a secure and scalable image storage solution. DTR has a
+built-in image scanning feature that checks every layer of every image for known vulnerabilities
+and displays the results in the UCP web UI. This helps users to identify and fix any security
+issues before deploying their applications. UCP also allows users to enforce security policies and
+only allow running applications that use images that are scanned and free of
+vulnerabilities.</p>
+</article>
+</details>
+<ol start="46">
+<li>A user's attempts to set the system time from inside a Docker container are unsuccessful. Could this be blocking this operation? Solution. SELinux</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/28973728/change-system-date-time-in-docker-containers-without-impacting-host">https://stackoverflow.com/questions/28973728/change-system-date-time-in-docker-containers-without-impacting-host</a></li>
+<li><a href="https://www.baeldung.com/ops/docker-change-date">https://www.baeldung.com/ops/docker-change-date</a></li>
+<li><a href="https://www.howtogeek.com/devops/how-to-handle-timezones-in-docker-containers/">https://www.howtogeek.com/devops/how-to-handle-timezones-in-docker-containers/</a></li>
+<li><a href="https://bobcares.com/blog/change-time-in-docker-container/">https://bobcares.com/blog/change-time-in-docker-container/</a></li>
+<li><a href="https://serverfault.com/questions/824631/how-to-set-system-time-dynamically-in-a-docker-container">https://serverfault.com/questions/824631/how-to-set-system-time-dynamically-in-a-docker-container</a></li>
+</ul>
+<p>SELinux could be blocking the operation of setting the system time from inside a Docker
+container. SELinux is a security mechanism that enforces mandatory access control (MAC)
+policies on Linux systems. It restricts the actions that processes can perform based on their
+security contexts, such as user, role, type, and level. By default, SELinux prevents Docker
+containers from accessing or modifying the host's system time, as this could pose a security risk
+or cause inconsistency. To allow Docker containers to set the system time, SELinux needs to be
+configured with the appropriate permissions or labels, or disabled altogether. However, this is not
+recommended, as it could compromise the security and stability of the system</p>
+</article>
+</details>
+<ol start="47">
+<li>Is this a function of UCP? Solution: enforces the deployment of signed images to the cluster</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://dockerlabs.collabnix.com/advanced/Docker-UCP-overview.html">https://dockerlabs.collabnix.com/advanced/Docker-UCP-overview.html</a></li>
+<li><a href="https://www.howtogeek.com/devops/how-to-sign-your-docker-images-to-increase-trust/">https://www.howtogeek.com/devops/how-to-sign-your-docker-images-to-increase-trust/</a></li>
+</ul>
+<p>This is a function of UCP, as it integrates with Docker Trusted Registry (DTR) to provide built-in
+security and access control for your images. DTR allows you to enforce security policies and only
+allow running applications that use Docker images you know and trust. You can sign your images
+with Docker Content Trust (DCT) to prove their authenticity and integrity. UCP will verify the
+signatures of the images before deploying them to the cluster</p>
+</article>
+</details>
+<ol start="48">
+<li>You add a new user to the engineering organization in DTR. Will this action grant them read/write access to the engineering/api repository? Solution. Mirror the engineering/api repository to one of the user's own private repositories.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/32660206/docker-registry-vs-docker-trusted-registry">https://stackoverflow.com/questions/32660206/docker-registry-vs-docker-trusted-registry</a></li>
+<li><a href="https://dockerlabs.collabnix.com/beginners/dockertrustedregistry.html">https://dockerlabs.collabnix.com/beginners/dockertrustedregistry.html</a></li>
+<li><a href="https://www.cloudbees.com/blog/docker-trusted-registry">https://www.cloudbees.com/blog/docker-trusted-registry</a></li>
+</ul>
+<p>Mirroring the engineering/api repository to one of the user's own private repositories will not
+grant them read/write access to the original repository. Mirroring is a feature that allows users to
+automatically sync images from one repository to another, either within the same DTR or across
+different DTRs. Mirroring does not affect the permissions or roles of the users or teams associated
+with the source or destination repositories. To grant a user read/write access to the
+engineering/api repository, the user needs to be added to a team that has the appropriate role
+for that repository, or the repository needs to be configured with the appropriate visibility and
+access settings</p>
+</article>
+</details>
+<ol start="49">
+<li>Is this an advantage of multi-stage builds? Solution: better caching when building Docker images</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/build/building/multi-stage/">https://docs.docker.com/build/building/multi-stage/</a></li>
+<li><a href="https://www.howtogeek.com/devops/what-are-multi-stage-docker-builds/">https://www.howtogeek.com/devops/what-are-multi-stage-docker-builds/</a></li>
+</ul>
+<p>Better caching when building Docker images is an advantage of multi-stage builds. Multi-stage
+builds allow you to use multiple FROM statements in your Dockerfile, each starting a new stage of
+the build. This can help you improve the caching efficiency of your Docker images, as each stage
+can use its own cache layer. For example, if you have a stage that installs dependencies and
+another stage that compiles your code, you can reuse the cached layer of the dependencies
+stage if they don't change, and only rebuild the code stage if it changes. This can save you time
+and bandwidth when building and pushing your images</p>
+</article>
+</details>
+<ol start="50">
+<li>Will this command display a list of volumes for a specific container? Solution: <code>docker container logs nginx --volumes</code></li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/54912615/storing-docker-nginx-access-logs-inside-a-docker-volume">https://stackoverflow.com/questions/54912615/storing-docker-nginx-access-logs-inside-a-docker-volume</a></li>
+</ul>
+<p>The command <code>docker container logs nginx --volumes</code> will not display a list of volumes for a specific
+container. The <code>docker container logs</code> command shows the logs of a container, which are usually the
+standard output and standard error of the main process running in the container. The <code>--volumes</code> flag is not a valid option for this command, and will result in an error message. To
+display a list of volumes for a specific container, you can use the <code>docker inspect</code> command with a
+filter option, such as <code>docker inspect -f '{{ .Mounts }}' nginx</code>. This will show the source,
+destination, mode, type, and propagation of each volume mounted in the
+container.</p>
+</article>
+</details>
+<ol>
+<li>In the context of a swarm mode cluster, does this describe a node? Solution: a virtual machine participating in the swarm</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/">https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/</a></li>
+</ul>
+<p>A virtual machine participating in the swarm is a node in the context of a swarm mode cluster. A node is an instance of the Docker engine participating in the swarm. A node can be either a physical machine or a virtual machine. Nodes are either managers or workers. Managers maintain cluster state and manage cluster tasks. Workers execute tasks assigned by managers.</p>
+</article>
+</details>
+<ol start="51">
+<li>Following the principle of least privilege, which of the following methods can be used to securely grnt access to the specific user to communicate to a Docker engine? (Choose two.)</li>
+</ol>
+<p>A) Utilize the '--host 0.0.0.0:2375' option to the Docker daemon to listen on port 2375 over TCP on all interfaces</p>
+<p  class="correct" >B) Utilize openssl to create TLS client and server certificates, configuring the Docker engine to use with mutual TLS over TCP.</p>
+<p>C) Utilize the '--host 127.0.0.1:2375' option to the Docker daemon to listen on port 2375 over TCP on localhost</p>
+<p>D) Give the user root access to the server to allow them to run Docker commands as root.</p>
+<p  class="correct" >E) Add the user to the 'docker' group on the server or specify the grou with the '--group' Docker daemon option.</p>
+<ol start="52">
+<li>What is the purpose of Docker Content Trust?</li>
+</ol>
+<p  class="correct" >A) Signing and verification of image tags</p>
+<p>B) Enabling mutual TLS between the Docker client and server</p>
+<p>C) Docker registry TLS verification and encryption</p>
+<p>D) Indicating an image on Docker Hub is an official image</p>
+<ol start="53">
+<li>What is the purpose of a client bundle in the Universal Control Plane?</li>
+</ol>
+<p  class="correct" >A) Authenticate a user using client certificates to the Universal Control Plane</p>
+<p>B) Provide a new user instructions for how to login to the Universal Control Plane</p>
+<p>C) Provide a user with a Docker client binary compatible with the Universal Control Plane</p>
+<p>D) Group multiple users in a team in the Universal Control Plane</p>
+<ol start="54">
+<li>Which of the following is supported by control groups?</li>
+</ol>
+<p>A) Manage certificates</p>
+<p>B) Collect net</p>
+<p  class="correct" >C) Limit CPU usage within a container</p>
+<p>D) Isolate processes in a container</p>
+<ol start="55">
+<li>When using the Docker client to push an image to a registry, what environment variable is used to instruct the client to perform signing of the image?</li>
+</ol>
+<p  class="correct" >A) DOCKER_CONTENT_TRUST=1</p>
+<p>B) DOCKER_IMAGE_SIGN=1</p>
+<p>C) DOCKER_PUSH_SIGN=1</p>
+<p>D) NOTARY_ENABLE=1</p>
+<ol start="56">
+<li>You have created a Docker bridge network on a host with three containers attached, how do you make this containers accessible outside of the host?</li>
+</ol>
+<p>A) Use network attach to access the containers on the bridge network</p>
+<p  class="correct" >B) Use either EXPOSE or --publish to access the containers on the bridge network</p>
+<p>C) Use network connect to access the containers on the bridge network</p>
+<p>D) Use --link to access the containers on the bridge network</p>
+<ol start="57">
+<li>Which of the following commands will ensure that overlay traffic between service tasks is encrypted?</li>
+</ol>
+<p>A) docker service create --network <code>&lt;network-name&gt;</code> --secure <code>&lt;service-name&gt;</code></p>
+<p>B) docker network create -d overlay --secure <code>&lt;network-name&gt;</code></p>
+<p  class="correct" >C) docker network create -d overlay -o encrypted=true <code>&lt;network-name&gt;</code></p>
+<p>D) docker service create --network <code>&lt;network-name&gt;</code> --encrypted <code>&lt;service-name&gt;</code></p>
+<ol start="58">
+<li>Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate? Solution: List insecure registries in the 'daemon.json configuration file under the \insecureregistries' key.</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>Docker allows the use of insecure registries through a specific configuration in the Docker
+daemon. By listing the insecure registries in the <code>daemon.json</code> configuration file under the
+<code>insecure-registries</code> key, Docker can interact with these registries even without a trusted TLS
+certificate. This is particularly useful when setting up a private Docker registry. However, it's
+important to note that this configuration bypasses the security provided by TLS, and should be
+used with caution.</p>
+</article>
+</details>
+<ol start="59">
+<li>The Kubernetes yaml shown below describes a networkPolicy. Will the networkPolicy BLOCK this trafftc? Solution.  a request issued from a pod bearing the tier: backend label, to a pod bearing the tier: frontend label</li>
+</ol>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">NetworkPolicy</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">dca</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>    <span style="color:#58a1dd">namespace</span>: <span style="color:#a6be9d">default</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>    <span style="color:#58a1dd">podSelector</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>        <span style="color:#58a1dd">matcheLabels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span>            <span style="color:#58a1dd">tier</span>: <span style="color:#a6be9d">backend</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>    <span style="color:#58a1dd">ingress</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>    -   <span style="color:#58a1dd">from</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>        -   <span style="color:#58a1dd">podSelector</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>                <span style="color:#58a1dd">matchLabels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">14</span><span>                    <span style="color:#58a1dd">tier</span>: <span style="color:#a6be9d">api</span>
+</span></span></code></pre><p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">https://kubernetes.io/docs/concepts/services-networking/network-policies/</a></li>
+</ul>
+<p>The networkPolicy will block the traffic from a pod bearing the tier: backend label, to a pod
+bearing the tier: frontend label. The networkPolicy specifies that only pods with the tier: frontend
+label can access the pods with the app: guestbook-api and tier: backend labels on port 801. Any
+other traffic to the backend pods will be denied by default. Therefore, a request issued from a
+pod bearing the tier: backend label, to a pod bearing the tier: frontend label will be blocked by
+the networkPolicy</p>
+</article>
+</details>
+<ol start="60">
+<li>Is this a supported user authentication method for Universal Control Plane? Solution. x.500</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>x.500 is not a supported user authentication method for Universal Control Plane (UCP). UCP
+supports two types of user authentication methods: built-in and external. Built-in authentication
+uses the UCP's own database to store and verify user credentials. External authentication uses an
+external LDAP or Active Directory service to manage user accounts and passwords. x.500 is a
+standard for directory services, which can be used by LDAP or Active Directory, but it is not a
+user authentication method by itself</p>
+</article>
+</details>
+<ol start="61">
+<li>In Docker Trusted Registry, is this how a user can prevent an image, such as <code>nginx:latest</code>, from being overwritten by another user with push access to the repository? Solution: Keep a backup copy of the image on another repository.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/62539266/is-there-a-way-to-prevent-overwriting-existing-tags-images-in-azure-container-re">https://stackoverflow.com/questions/62539266/is-there-a-way-to-prevent-overwriting-existing-tags-images-in-azure-container-re</a></li>
+</ul>
+<p>Keeping a backup copy of the image on another repository is not how a user can prevent an
+image, such as <code>nginx:latest</code>, from being overwritten by another user with push access to the
+repository. This approach does not prevent the original image from being overwritten, it only
+provides a way to restore it from another source. However, this may not be reliable or efficient,
+as the backup repository may not be in sync with the original one, or may not be accessible at all
+times. To prevent an image from being overwritten by another user, the user can use the DTR
+web UI to make the tag immutable. This feature allows the user to lock a specific tag, so that no
+one can push a new image with the same tag to the repository. This ensures that the image is
+always consistent and secure.</p>
+</article>
+</details>
+<ol start="62">
+<li>Which of the following commands will create a swarm service which only listens on port 53 using the UDP protocol?</li>
+</ol>
+<p  class="correct" >A) docker service create --name dns-cache -p 53:53/udp dns-cache</p>
+<p>B) docker service create --name dns-cache -p 53:53 --service udp dns-cache</p>
+<p>C) docker service create --name dns-cache -p 53:53 ..constraint networking.protocol.udp=true dns-cache</p>
+<p>D) docker service create --name dns-cache -p 53:53 --udp dns-cache</p>
+<ol start="63">
+<li>Which of the following is true about using the '-P' option when creating a new container?</li>
+</ol>
+<p  class="correct" >A) Docker binds each exposed container port to a random port on all the host's interface</p>
+<p>B) Docker gives extended privileges to the container.</p>
+<p>C) Docker binds each exposed container port to a random port on a specified host interface</p>
+<p>D) Docker binds each exposed container port with the same port on the host</p>
+<ol start="64">
+<li>Which set of commands can identify the publishd port(s) for a container? (Choose 1.)</li>
+</ol>
+<p>A) 'docker port inspect', 'docker container inspect'</p>
+<p  class="correct" >B) 'docker container inspect', docker port'</p>
+<p>C) 'docker info','docker network inspect'</p>
+<p>D) 'docker network inspect','docker port'</p>
+<ol start="65">
+<li>Which of the following is true about overlay networks?</li>
+</ol>
+<p>A) Overlay networks are created only on the manager node that you created the overlay networking on</p>
+<p  class="correct" >B) Overlay networks are created on all cluster nodes when you create the overlay network.</p>
+<p>C) Overlay networks are first created on the manager nodes. Then they are created on the worker nodes once a task is scheduled on the specific worker node.</p>
+<p>D) Overlay networks are only created on the manager nodes.</p>
+<ol start="66">
+<li>What behavior is expected when a service is created with the following command: <code>docker service create --publish 8000:80 nginx</code></li>
+</ol>
+<p  class="correct" >A) All nodes in the cluster will listen on port 8080 and forward to port 80 in the container.</p>
+<p>B) Only a single node in the cluster will listen on port 8080 and forward to port 80 in the container.</p>
+<p>C) All nodes in the cluster will listen on port 80 and forward to port 8080 in the container.</p>
+<p>D) Only a single node in the cluster will listen on port 80 and forward to port 8080 in the container.</p>
+<ol start="67">
+<li>A user is having problems running Docker. Which of the following will start Docker in debug mode?</li>
+</ol>
+<p  class="correct" >A) Set the debug key to true in the 'daemon.json' file.</p>
+<p>B) Start the 'dockerd' process manually with the '--logging' flag set to debug</p>
+<p>C) Set the logging key to debug in the 'daemon.json' file.</p>
+<p>D) Start the 'dockerd' process manually with the '--raw-logs' flag set to debug</p>
+<ol start="68">
+<li>Which command interactively monitors all container activity in the Docker engine?</li>
+</ol>
+<p>A) docker system logs</p>
+<p  class="correct" >B) docker system events</p>
+<p>C) docker container events</p>
+<p>D) docker container logs</p>
+<ol start="69">
+<li>Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate? Solution: Set IGNORE_TLS in the <code>daemon.json</code> configuration file.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority">https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority</a></li>
+<li><a href="https://docs.docker.com/engine/security/certificates/">https://docs.docker.com/engine/security/certificates/</a></li>
+<li><a href="https://stackoverflow.com/questions/58476218/unable-to-push-to-private-docker-registry-via-tls">https://stackoverflow.com/questions/58476218/unable-to-push-to-private-docker-registry-via-tls</a></li>
+<li><a href="https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052">https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052</a></li>
+</ul>
+<p>This is not a way to configure the Docker engine to use a registry without a trusted TLS
+certificate. There is no such option as IGNORE_TLS in the <code>daemon.json</code> configuration file. The
+<code>daemon.json</code> file is used to configure various aspects of the Docker engine, such as logging,
+storage, networking, and security. To use a registry without a trusted TLS certificate, you need to
+either add the certificate to the trusted root certificates of the system, or configure the Docker
+engine to allow insecure registries. To add the certificate to the trusted root certificates, you
+need to copy the certificate file to the <code>/etc/docker/certs.d/{registry-hostname}/</code> directory on
+every Docker host. To configure the Docker engine to allow insecure registries, you need to add
+the registry hostname or IP address to the <code>insecure-registries</code> array in the <code>daemon.json</code> file.
+For example:</p>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>{ <span style="color:#58a1dd">&#34;insecure-registries&#34;</span> : [<span style="color:#a6be9d">&#34;myregistry.example.com:5000&#34;</span>] }
+</span></span></code></pre><p>Note that using insecure registries is not recommended, as it exposes you to potential man-inthe-middle attacks and data corruption. You should always use a registry with a trusted TLS
+certificate, or use Docker Content Trust to sign and verify your images</p>
+</article>
+</details>
+<ol start="70">
+<li>Is this a way to configure the Docker engine to use a registry without a trusted TLS certificate? Solution. Set <code>INSECURE_REGISTRY</code> in the <code>/etc/docker/default</code> configuration file.</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority">https://stackoverflow.com/questions/50768317/docker-pull-certificate-signed-by-unknown-authority</a></li>
+<li><a href="https://docs.docker.com/engine/security/certificates/">https://docs.docker.com/engine/security/certificates/</a></li>
+<li><a href="https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052">https://forums.docker.com/t/how-to-build-docker-registry-without-ssl/119052</a></li>
+<li><a href="https://stackoverflow.com/questions/72981831/login-to-docker-registry-with-client-certificate-under-windows">https://stackoverflow.com/questions/72981831/login-to-docker-registry-with-client-certificate-under-windows</a></li>
+</ul>
+<p>Setting <code>INSECURE_REGISTRY</code> in the <code>/etc/docker/default</code> configuration file is one way to
+configure the Docker engine to use a registry without a trusted TLS certificate. This option tells
+the Docker daemon to accept insecure connections to the specified registry, bypassing the
+certificate verification. However, this method is not recommended, as it exposes the registry and
+the Docker engine to potential security risks. A better way to use a registry without a trusted TLS
+certificate is to add the registry's CA certificate to the Docker daemon's trust store, as described
+in the Docker documentation or other online guides</p>
+</article>
+</details>
+<ol start="71">
+<li>Is this an advantage of multi-stage builds? Solution. better logical separation of Dockerfile instructions for increased readability</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/build/building/multi-stage/">https://docs.docker.com/build/building/multi-stage/</a></li>
+<li><a href="https://www.howtogeek.com/devops/what-are-multi-stage-docker-builds/">https://www.howtogeek.com/devops/what-are-multi-stage-docker-builds/</a></li>
+</ul>
+<p>Multi-stage builds allow you to use multiple FROM statements in your Dockerfile, each starting
+a new stage of the build. This can help you achieve better logical separation of Dockerfile
+instructions for increased readability, as well as other benefits such as smaller image size, faster
+build time, and reduced security risks. By separating your Dockerfile into different stages, you
+can organize your instructions by their purpose, such as building, testing, or deploying your
+application. You can also copy only the artifacts you need from one stage to another, leaving
+behind the unnecessary dependencies or tools. This can make your Dockerfile easier to read
+and maintain, as well as improve the performance and security of your final image.</p>
+</article>
+</details>
+<ol start="72">
+<li>An application image runs in multiple environments, with each environment using different certificates and ports. Is this a way to provision configuration to containers at runtime? Solution: Create a Dockerfile for each environment, specifying ports and ENV variables for certificates.</li>
+</ol>
+<p>A- Yes</p>
+<p  class="correct" >B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<p>While creating a Dockerfile for each environment is a possible solution, it is not the most efficient
+or scalable way to provision configuration to containers at runtime. Docker provides several
+mechanisms to inject configuration into containers at runtime, such as environment variables,
+command line arguments, Docker secrets for sensitive data, or even configuration files mounted
+as volumes. These methods allow the same Docker image to be used across multiple
+environments, promoting immutability and consistency across your deployments. Creating a
+separate Dockerfile for each environment would mean maintaining multiple versions of the
+Dockerfile, which could lead to inconsistencies and is generally not a recommended practice</p>
+</article>
+</details>
+<ol start="73">
+<li>You configure a local Docker engine to enforce content trust by setting the environment variable DOCKER_C0NTENT_TRUST=l. If <code>myorg/myimage: 1.0</code> is unsigned, does Docker block this command? Solution. <code>docker image build</code>, from a Dockeflle that begins <code>FROM myorg/myimage: l1.0</code></li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/security/trust/">https://docs.docker.com/engine/security/trust/</a></li>
+<li><a href="https://www.trendmicro.com/vinfo/us/security/news/virtualization-and-cloud/docker-content-trust-what-it-is-and-how-it-secures-container-images">https://www.trendmicro.com/vinfo/us/security/news/virtualization-and-cloud/docker-content-trust-what-it-is-and-how-it-secures-container-images</a></li>
+<li><a href="https://docs.docker.com/engine/security/trust/trust_automation/">https://docs.docker.com/engine/security/trust/trust_automation/</a></li>
+</ul>
+<p>Docker will block this command if you configure the local Docker engine to enforce content
+trust by setting the environment variable DOCKER_CONTENT_TRUST=1. This means that you can
+only pull, run, or build with trusted images that have been signed using Docker Content Trust
+(DCT). DCT is a feature that allows you to use digital signatures to verify the integrity and the
+publisher of specific image tags. If <code>myorg/myimage:1.0</code> is unsigned, it means that it does not
+have a valid signature from the image publisher or a trusted delegate. Therefore, Docker will not
+allow you to build an image from a Dockerfile that begins with <code>FROM myorg/myimage:1.0</code>, as it
+cannot verify the source or the content of the base image. You will get an error message like this:</p>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>No valid trust data for 1.0
+</span></span></code></pre><p>To avoid this error, you need to either disable DCT by setting DOCKER_CONTENT_TRUST=0, or
+use a signed image tag as the base image in your Dockerfile</p>
+</article>
+</details>
+<ol start="74">
+<li>In the context of a swarm mode cluster, does this describe a node? Solution: a physical machine participating in the swarm</li>
+</ol>
+<p  class="correct" >A- Yes</p>
+<p>B- No</p>
+<details>
+<summary>
+    <article class="bg-purple-900">
+        Information
+    </article>
+</summary>
+<article class="bg-purple-900">
+<ul>
+<li><a href="https://docs.docker.com/engine/swarm/manage-nodes/">https://docs.docker.com/engine/swarm/manage-nodes/</a></li>
+<li><a href="https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/">https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/</a></li>
+</ul>
+<p>A node is a physical or virtual machine running Docker Engine in swarm mode. A node can be
+either a manager or a worker, depending on its role in the cluster. A physical machine
+participating in the swarm is a node, regardless of its role or availability</p>
 </article>
 </details>
 </div>
