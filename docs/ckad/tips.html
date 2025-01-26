@@ -1,0 +1,84 @@
+<head>
+    <title>Exam Preparation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <style>
+        .hide-until-load {
+            visibility: hidden;
+        }
+    </style>
+
+
+    <script src="https://jiang-gianni.github.io/exam-prep/main.js" defer></script>
+    <link rel="stylesheet" href="https://jiang-gianni.github.io/exam-prep/style.css">
+</head><style></style>
+<ul>
+<li><a href="https://kubernetes.io/docs/tasks/tools/">https://kubernetes.io/docs/tasks/tools/</a></li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>minikube start
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>minikube dashboard
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>minikube pause
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span>minikube unpause
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span>minikube stop
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">6</span><span>minikube config <span style="color:#58a1dd">set</span> memory <span style="color:#a6be9d">9001</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">7</span><span>minikube addons list
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">8</span><span>minikube delete --all
+</span></span></code></pre><ul>
+<li>
+<p><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands">https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands</a></p>
+</li>
+<li>
+<p><a href="https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#cka-and-ckad-environment">https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#cka-and-ckad-environment</a></p>
+</li>
+<li>
+<p>Remember to switch to the context and namespace of the question</p>
+</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl config set-context &lt;context-of-question&gt; <span style="color:#a6be9d">\
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#a6be9d"></span> --namespace<span style="color:#ff636f">=</span>&lt;namespace-of-question&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>kubectl config use-context &lt;context-of-question&gt;
+</span></span></code></pre><ul>
+<li><code>kubectl</code> comes with <code>k</code> alias and auto completitions:</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">k</span><span style="color:#ff636f">=</span>kubectl
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k version
+</span></span></code></pre><p><a href="https://kubernetes.io/docs/reference/kubectl/quick-reference/#kubectl-autocomplete">https://kubernetes.io/docs/reference/kubectl/quick-reference/#kubectl-autocomplete</a></p>
+<ul>
+<li>get a list of default cli short-names:</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl api-resources <span style="color:#828b96;font-style:italic"># returns list</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>kubectl describe pvc my-claim <span style="color:#828b96;font-style:italic"># example for  persistentVolumeClaim</span>
+</span></span></code></pre><ul>
+<li>
+<p><a href="https://killer.sh/">https://killer.sh/</a></p>
+</li>
+<li>
+<p>learn the text editor: vim (default) or nano</p>
+</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">KUBE_EDITOR</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#34;nano&#34;</span> kubectl edit svc/registry
+</span></span></code></pre><ul>
+<li>create some alias for the exam:</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">k</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kgp</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl get pods&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kgs</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl get svc&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kgn</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl get nodes&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kdp</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl describe pod&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">6</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kds</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl describe svc&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">7</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kdn</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl describe node&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">8</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kl</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl logs&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">9</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">kgpns</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#39;kubectl get pods --namespace&#39;</span>
+</span></span></code></pre><ul>
+<li>avoide graceful delete by forcing and using <code>--now</code>:</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl delete pod frontend --now
+</span></span></code></pre><ul>
+<li>generate the manifest using <code>--dry-run=client</code>, edit it and apply (using imperative commands is the most efficient and quick way to manage objects):</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl run frontend --image<span style="color:#ff636f">=</span>nginx:1.25.1 --port<span style="color:#ff636f">=</span><span style="color:#a6be9d">80</span> -o yaml --dry-run<span style="color:#ff636f">=</span>client &gt; pod.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>vim pod.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>kubectl apply -f pod.yaml
+</span></span></code></pre><p><img src="./kubernetes.png" alt="Kubernetes"></p>
+
