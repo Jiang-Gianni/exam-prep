@@ -31,17 +31,18 @@
 <p><a href="https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#cka-and-ckad-environment">https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#cka-and-ckad-environment</a></p>
 </li>
 <li>
-<p>Remember to switch to the context and namespace of the question</p>
+<p><strong>Remember to switch to the context and namespace of the question</strong></p>
 </li>
 </ul>
-<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl config set-context &lt;context-of-question&gt; <span style="color:#a6be9d">\
-</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#a6be9d"></span> --namespace<span style="color:#ff636f">=</span>&lt;namespace-of-question&gt;
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>kubectl config use-context &lt;context-of-question&gt;
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl config set-context &lt;context-of-question&gt; --namespace<span style="color:#ff636f">=</span>&lt;namespace-of-question&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>kubectl config use-context &lt;context-of-question&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>kubectl config set-context --current --namespace<span style="color:#ff636f">=</span>&lt;namespace&gt;
 </span></span></code></pre><ul>
 <li><code>kubectl</code> comes with <code>k</code> alias and auto completitions:</li>
 </ul>
-<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">alias</span> <span style="color:#58a1dd">k</span><span style="color:#ff636f">=</span>kubectl
-</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k version
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span> <span style="color:#828b96;font-style:italic"># add to your bash shell.</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#58a1dd">echo</span> <span style="color:#a6be9d">&#34;alias k=kubectl&#34;</span> &gt;&gt; ~/.bashrc
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#58a1dd">echo</span> <span style="color:#a6be9d">&#34;complete -o default -F __start_kubectl k&#34;</span> &gt;&gt; ~/.bashrc
 </span></span></code></pre><p><a href="https://kubernetes.io/docs/reference/kubectl/quick-reference/#kubectl-autocomplete">https://kubernetes.io/docs/reference/kubectl/quick-reference/#kubectl-autocomplete</a></p>
 <ul>
 <li>get a list of default cli short-names:</li>
@@ -75,10 +76,20 @@
 </ul>
 <pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl delete pod frontend --now
 </span></span></code></pre><ul>
-<li>generate the manifest using <code>--dry-run=client</code>, edit it and apply (using imperative commands is the most efficient and quick way to manage objects):</li>
+<li>generate the manifest using <code>--dry-run=client</code> (without contacting the server) or <code>--dry-run=server</code> (contacting the API server), edit it and apply (using imperative commands is the most efficient and quick way to manage objects):</li>
 </ul>
 <pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl run frontend --image<span style="color:#ff636f">=</span>nginx:1.25.1 --port<span style="color:#ff636f">=</span><span style="color:#a6be9d">80</span> -o yaml --dry-run<span style="color:#ff636f">=</span>client &gt; pod.yaml
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>vim pod.yaml
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>kubectl apply -f pod.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#828b96;font-style:italic"># also valid for other types of resources `kubectl create ns my-namespace --dry-run=client -o yaml`</span>
+</span></span></code></pre><ul>
+<li>
+<p><code>--dry-run=server</code> shows explicitly the applied default values by the API server. I think it can be useful if you have to edit a field but don't remember exactly where it is located or the exact name. It is slower to execute than <code>--dry-run=client</code></p>
+</li>
+<li>
+<p>check syntax of yaml manifest using <code>--dry-run=client</code>:</p>
+</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl apply -f pod.yaml --dry-run<span style="color:#ff636f">=</span>client
 </span></span></code></pre><p><img src="./kubernetes.png" alt="Kubernetes"></p>
 
