@@ -1,8 +1,7 @@
 const invisible = "invisible"
 
-function copyToClipboard(htmlElement) {
-    htmlElement.innerText
-    navigator.clipboard.writeText(htmlElement.innerText)
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
 }
 
 function toggleClass(classList, classToToggle) {
@@ -18,14 +17,18 @@ var questionsHideAnswers = document.getElementById("questions-hide-answers")
 if (questionsHideAnswers != null) {
     for (let index = 0; index < questionsHideAnswers.children.length; index++) {
         const child = questionsHideAnswers.children[index]
-        if (child.tagName == "OL") {
+        if (child.tagName == "OL" || child.tagName == "UL") {
             child.nextElementSibling.classList.add(invisible)
             child.role = "button"
             child.addEventListener("click", function (e) {
-                copyToClipboard(this)
+                copyToClipboard(this.innerText)
                 var cl = this.nextElementSibling.classList
                 cl.add("text-center")
                 toggleClass(cl, invisible)
+                this.nextElementSibling.addEventListener("click", function (e) {
+                    // code snippet start with numbers
+                    copyToClipboard(this.innerText.substring(1))
+                })
             })
         }
     }

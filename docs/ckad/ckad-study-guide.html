@@ -1,0 +1,88 @@
+<head>
+    <title>Exam Preparation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <style>
+        .hide-until-load {
+            visibility: hidden;
+        }
+    </style>
+
+
+    <script src="https://jiang-gianni.github.io/exam-prep/main.js" defer></script>
+    <link rel="stylesheet" href="https://jiang-gianni.github.io/exam-prep/style.css">
+</head><style>.container{width:100%}</style>
+<ul>
+<li><a href="#book-certified-kubernetes-application-developer-ckad-study-guide"><strong>Book</strong>: Certified Kubernetes Application Developer (CKAD) Study Guide</a>
+<ul>
+<li><a href="#chapter-4-containers"><strong>Chapter 4, Containers</strong></a></li>
+<li><a href="#chapter-5-pods-and-namespaces"><strong>Chapter 5, Pods and Namespaces</strong></a></li>
+</ul>
+</li>
+</ul>
+<div id="questions-hide-answers" class="container hide-until-load">
+<h1 id="book-certified-kubernetes-application-developer-ckad-study-guidehttpswwworeillycomlibraryviewcertified-kubernetes-application9781492083726"><strong>Book</strong>: <a href="https://www.oreilly.com/library/view/certified-kubernetes-application/9781492083726/">Certified Kubernetes Application Developer (CKAD) Study Guide</a></h1>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">git</span> <span style="color:#58a1dd">clone</span> <span style="color:#58a1dd">git</span>@<span style="color:#58a1dd">github</span>.<span style="color:#58a1dd">com</span>:<span style="color:#58a1dd">bmuschko</span><span style="color:#ff636f">/</span><span style="color:#58a1dd">ckad</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">study</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">guide</span>.<span style="color:#58a1dd">git</span>
+</span></span></code></pre><h2 id="chapter-4-containers"><strong>Chapter 4, Containers</strong></h2>
+<ul>
+<li>Navigate to the directory <code>app-a/ch04/containerized-java-app</code> of the checked-out GitHub repository <code>bmuschko/ckad-study-guide</code>. Inspect the Dockerfile.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">cd</span> <span style="color:#58a1dd">app</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">a</span><span style="color:#ff636f">/</span><span style="color:#58a1dd">ch04</span><span style="color:#ff636f">/</span><span style="color:#58a1dd">container</span><span style="color:#ff636f">/</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#58a1dd">cat</span> <span style="color:#58a1dd">Dockerfile</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#828b96;font-style:italic">// EXPOSE 3000 in the Dockerfile
+</span></span></span></code></pre><ul>
+<li>Build the container image from the Dockerfile with the tag <code>nodejs-hello-world:1.0.0</code>.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">build</span> . <span style="color:#ff636f">-</span><span style="color:#58a1dd">t</span> <span style="color:#58a1dd">nodejs</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">hello</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">world</span>:<span style="color:#a6be9d">1.0.0</span>
+</span></span></code></pre><ul>
+<li>Run a container with the container image. Make the application available on port 80.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">run</span> <span style="color:#ff636f">--</span><span style="color:#58a1dd">detach</span> <span style="color:#ff636f">-</span><span style="color:#58a1dd">p</span> <span style="color:#a6be9d">80</span>:<span style="color:#a6be9d">3000</span> <span style="color:#58a1dd">nodejs</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">hello</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">world</span>:<span style="color:#a6be9d">1.0.0</span>
+</span></span></code></pre><ul>
+<li>Execute a curl or wget command against the application’s endpoint.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">curl</span> <span style="color:#58a1dd">localhost</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#58a1dd">curl</span> <span style="color:#58a1dd">localhost</span>:<span style="color:#a6be9d">80</span>
+</span></span></code></pre><ul>
+<li>Retrieve the container logs.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">container</span> <span style="color:#58a1dd">ls</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">logs</span> <span style="color:#a6be9d">1</span><span style="color:#58a1dd">cb5802a231b</span>
+</span></span></code></pre><ul>
+<li>Modify the Dockerfile from the previous exercise. Change the base image to the tag 20.4-alpine and the working directory to /node.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#ff636f">FROM</span><span style="color:#a6be9d"> node:20.4-alpine</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#ff636f">WORKDIR</span><span style="color:#a6be9d"> /node</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#ff636f">RUN</span> npm install
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#ff636f">COPY</span> . .
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span><span style="color:#ff636f">EXPOSE</span><span style="color:#a6be9d"> 3000</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">6</span><span><span style="color:#ff636f">CMD</span> [<span style="color:#a6be9d">&#34;node&#34;</span>, <span style="color:#a6be9d">&#34;index.js&#34;</span>]
+</span></span></code></pre><ul>
+<li>Build the container image from the Dockerfile with the tag nodejs-hello-world:1.1.0. Ensure that container image has been created by listing it.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">build</span> . <span style="color:#ff636f">-</span><span style="color:#58a1dd">t</span> <span style="color:#58a1dd">nodejs</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">hello</span><span style="color:#ff636f">-</span><span style="color:#58a1dd">world</span>:<span style="color:#a6be9d">1.1.0</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#828b96;font-style:italic">// 0.996 npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open &#39;/node/package.json&#39;
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#828b96;font-style:italic">// DOES NOT WORK :)
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#828b96;font-style:italic"></span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">images</span>
+</span></span></code></pre><ul>
+<li>Pull the container image alpine:3.18.2 available on Docker Hub.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">pull</span> <span style="color:#58a1dd">alpine</span>:<span style="color:#a6be9d">3.18.2</span>
+</span></span></code></pre><ul>
+<li>Save the container image to the file alpine-3.18.2.tar.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">save</span> <span style="color:#ff636f">-</span><span style="color:#58a1dd">o</span> <span style="color:#58a1dd">alpine</span><span style="color:#ff636f">-</span><span style="color:#a6be9d">3.18.2</span>.<span style="color:#58a1dd">tar</span> <span style="color:#58a1dd">alpine</span>:<span style="color:#a6be9d">3.18.2</span>
+</span></span></code></pre><ul>
+<li>Delete the container image. Verify the container image is not listable anymore.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">image</span> <span style="color:#58a1dd">rm</span> <span style="color:#58a1dd">alpine</span>:<span style="color:#a6be9d">3.18.2</span>
+</span></span></code></pre><ul>
+<li>Reinstate the container image from the file alpine-3.18.2.tar.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">load</span> <span style="color:#ff636f">-</span><span style="color:#58a1dd">i</span> <span style="color:#58a1dd">alpine</span><span style="color:#ff636f">-</span><span style="color:#a6be9d">3.18.2</span>.<span style="color:#58a1dd">tar</span>
+</span></span></code></pre><ul>
+<li>Verify that the container image can be listed.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">docker</span> <span style="color:#58a1dd">images</span> <span style="color:#58a1dd">alpine</span>
+</span></span></code></pre><h2 id="chapter-5-pods-and-namespaces"><strong>Chapter 5, Pods and Namespaces</strong></h2>
+</div>

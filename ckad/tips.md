@@ -61,6 +61,10 @@ alias kds='kubectl describe svc'
 alias kdn='kubectl describe node'
 alias kl='kubectl logs'
 alias kgpns='kubectl get pods --namespace'
+
+alias ke='kubectl explain'
+alias kg='kubectl get'
+alias kd='kubectl describe'
 ```
 
 * avoide graceful delete by forcing and using `--now`:
@@ -86,5 +90,10 @@ kubectl apply -f pod.yaml --dry-run=client
 ```
 
 
+* Use `kubectl explain` if you want to see al the available fields
+```bash
+kubectl explain pod.spec.containers.readinessProbe --recursive
+kubectl explain LimitRange --recursive
+```
 
 ![Kubernetes](./kubernetes.png)
