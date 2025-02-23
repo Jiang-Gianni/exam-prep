@@ -18,6 +18,8 @@
 <li><a href="#chapter-4-containers"><strong>Chapter 4, Containers</strong></a></li>
 <li><a href="#chapter-5-pods-and-namespaces"><strong>Chapter 5, Pods and Namespaces</strong></a></li>
 <li><a href="#chapter-6-jobs-and-cronjobs"><strong>Chapter 6, Jobs and CronJobs</strong></a></li>
+<li><a href="#chapter-7-volumes"><strong>Chapter 7, Volumes</strong></a></li>
+<li><a href="#chapter-8-multi-container-pods"><strong>Chapter 8, Multi-Container Pods</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -126,6 +128,7 @@
 </span></span></code></pre><ul>
 <li>Edit the Pod named loop. Change the command to run in an endless loop. Each iteration should echo the current date.</li>
 </ul>
+<div>
 <pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">kubectl</span> <span style="color:#58a1dd">delete</span> <span style="color:#58a1dd">pod</span> <span style="color:#58a1dd">loop</span>
 </span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">v1</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">Pod</span>
@@ -146,11 +149,280 @@
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">17</span><span>  <span style="color:#58a1dd">dnsPolicy</span>: <span style="color:#a6be9d">ClusterFirst</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">18</span><span>  <span style="color:#58a1dd">restartPolicy</span>: <span style="color:#a6be9d">Never</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">19</span><span><span style="color:#58a1dd">status</span>: {}
-</span></span></code></pre><ul>
+</span></span></code></pre></div>
+<ul>
 <li>Inspect the events and the status of the Pod loop.</li>
 </ul>
 <pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#58a1dd">kubectl</span> <span style="color:#58a1dd">describe</span> <span style="color:#58a1dd">pod</span> <span style="color:#58a1dd">loop</span> | <span style="color:#58a1dd">grep</span> <span style="color:#ff636f">-</span><span style="color:#58a1dd">C</span> <span style="color:#a6be9d">10</span> <span style="color:#58a1dd">Events</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#58a1dd">kubectl</span> <span style="color:#58a1dd">delete</span> <span style="color:#58a1dd">pod</span> <span style="color:#58a1dd">loop</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#58a1dd">kubectl</span> <span style="color:#58a1dd">delete</span> <span style="color:#58a1dd">ns</span> <span style="color:#58a1dd">ckad</span>
 </span></span></code></pre><h2 id="chapter-6-jobs-and-cronjobs"><strong>Chapter 6, Jobs and CronJobs</strong></h2>
+<ul>
+<li>Create a Job named random-hash using the container image alpine:3.17.3 that executes the shell command <code>echo $RANDOM | base64 | head -c 20</code>. Configure the Job to execute with two Pods in parallel. The number of completions should be set to 5.</li>
+</ul>
+<div>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl create job random-hash --image<span style="color:#ff636f">=</span>alpine:3.17.3 --dry-run<span style="color:#ff636f">=</span>client -o yaml &gt; job.yaml -- <span style="color:#58a1dd">echo</span> <span style="color:#58a1dd">$RANDOM</span>
+</span></span></code></pre><p>To read documentations regarding the fields:</p>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k explain Job.spec | grep -C <span style="color:#a6be9d">10</span> parallelism
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k explain Job.spec | grep -C <span style="color:#a6be9d">10</span> completion
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>k explain Job.spec | grep -C <span style="color:#a6be9d">10</span> backoffLimit
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">batch/v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">Job</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span>  <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">random-hash</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span>  <span style="color:#58a1dd">parallelism</span>: <span style="color:#a6be9d">2</span> <span style="color:#828b96;font-style:italic"># to be added</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>  <span style="color:#58a1dd">completions</span>: <span style="color:#a6be9d">5</span> <span style="color:#828b96;font-style:italic"># to be added</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>  <span style="color:#58a1dd">backoffLimit</span>: <span style="color:#a6be9d">4</span> <span style="color:#828b96;font-style:italic"># to be added</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span>  <span style="color:#58a1dd">template</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>    <span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>      <span style="color:#58a1dd">containers</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>      - <span style="color:#58a1dd">command</span>: [<span style="color:#a6be9d">&#34;/bin/sh&#34;</span>, <span style="color:#a6be9d">&#34;-c&#34;</span>, <span style="color:#a6be9d">&#34;echo $RANDOM | base64 | head -c 20&#34;</span>] <span style="color:#828b96;font-style:italic"># to be updated</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>        <span style="color:#58a1dd">image</span>: <span style="color:#a6be9d">alpine:3.17.3</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">14</span><span>        <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">random-hash</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">15</span><span>        <span style="color:#58a1dd">resources</span>: {}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">16</span><span>      <span style="color:#58a1dd">restartPolicy</span>: <span style="color:#a6be9d">Never</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">17</span><span><span style="color:#58a1dd">status</span>: {}
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>kubectl apply -f job.yaml
+</span></span></code></pre></div>
+<ul>
+<li>Identify the Pods that executed the shell command. How many Pods do you expect to exist?</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span><span style="color:#828b96;font-style:italic"># 5 completed pods</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>kubectl get pods | grep <span style="color:#a6be9d">&#34;random-hash-&#34;</span>
+</span></span></code></pre><ul>
+<li>Retrieve the generated hash from one of the Pods.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k logs random-hash-4vnh6
+</span></span></code></pre><ul>
+<li>Delete the Job. Will the corresponding Pods continue to exist?</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k delete job random-hash
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k get pods
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#828b96;font-style:italic"># pods are also deleted</span>
+</span></span></code></pre><ul>
+<li>Create a new CronJob named google-ping. When executed, the Job should run a curl command for google.com. Pick an appropriate image. The execution should occur every two minutes.</li>
+</ul>
+<div>
+<p><a href="https://en.wikipedia.org/wiki/Cron"><strong>Cron Expression</strong></a></p>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k create cronjob google-ping --schedule<span style="color:#ff636f">=</span><span style="color:#a6be9d">&#34;*/2 * * * *&#34;</span> --image<span style="color:#ff636f">=</span>nginx:1.25.1 --dry-run<span style="color:#ff636f">=</span>client -o yaml -- /bin/sh -c <span style="color:#a6be9d">&#39;curl google.com&#39;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>k create cronjob google-ping --schedule<span style="color:#ff636f">=</span><span style="color:#a6be9d">&#34;*/2 * * * *&#34;</span> --image<span style="color:#ff636f">=</span>nginx:1.25.1 -- /bin/sh -c <span style="color:#a6be9d">&#39;curl google.com&#39;</span>
+</span></span></code></pre></div>
+<ul>
+<li>Watch the creation of the underlying Jobs managed by the CronJob. Check the command-line options of the relevant command or consult the Kubernetes documentation.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k get cj -w
+</span></span></code></pre><ul>
+<li>Reconfigure the CronJob to retain a history of seven executions.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k explain CronJob --recursive | grep -C <span style="color:#a6be9d">10</span> -i <span style="color:#58a1dd">history</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k explain CronJob.spec.successfulJobsHistoryLimit
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#58a1dd">KUBE_EDITOR</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#34;nano&#34;</span> k edit cj google-ping
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span><span style="color:#828b96;font-style:italic"># set successfulJobsHistoryLimit: 7 in manifest</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">7</span><span>k get cj google-ping -o yaml | grep -i <span style="color:#58a1dd">history</span>
+</span></span></code></pre><ul>
+<li>Reconfigure the CronJob to disallow a new execution if the current execution is still running. Consult the Kubernetes documentation for more information.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k explain CronJob --recursive | grep -C <span style="color:#a6be9d">10</span> -i concurrency
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k explain CronJob.spec.concurrencyPolicy --recursive
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#58a1dd">KUBE_EDITOR</span><span style="color:#ff636f">=</span><span style="color:#a6be9d">&#34;nano&#34;</span> k edit cj google-ping
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">6</span><span><span style="color:#828b96;font-style:italic"># set CronJob.spec.concurrencyPolicy to &#34;Forbid&#34; in manifest</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">7</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">8</span><span>k get cj google-ping -o yaml | grep -i concurrency
+</span></span></code></pre><h2 id="chapter-7-volumes"><strong>Chapter 7, Volumes</strong></h2>
+<ul>
+<li>Create a Pod YAML manifest with two containers that use the image alpine:3.12.0. Provide a command for both containers that keep them running forever.</li>
+</ul>
+<div>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k run alpine --image<span style="color:#ff636f">=</span>alpine:3.12.0 --dry-run<span style="color:#ff636f">=</span>client -o yaml --restart<span style="color:#ff636f">=</span>Never &gt; alpine.yaml -- /bin/sh -c <span style="color:#a6be9d">&#34;while true; do sleep 60; done;&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>nano alpine.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#828b96;font-style:italic"># Ctrl + K to cut/copy</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span><span style="color:#828b96;font-style:italic"># Ctrl + U to paste</span>
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#828b96;font-style:italic"># alpine.yaml</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">Pod</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>  <span style="color:#58a1dd">creationTimestamp</span>: <span style="color:#ff636f">null</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span>  <span style="color:#58a1dd">labels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>    <span style="color:#58a1dd">run</span>: <span style="color:#a6be9d">alpine</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>  <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">alpine</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>  <span style="color:#58a1dd">containers</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>  - <span style="color:#58a1dd">args</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>    - <span style="color:#a6be9d">/bin/sh</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>    - -<span style="color:#a6be9d">c</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">14</span><span>    - <span style="color:#a6be9d">while true; do sleep 60; done;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">15</span><span>    <span style="color:#58a1dd">image</span>: <span style="color:#a6be9d">alpine:3.12.0</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">16</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">container1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">17</span><span>    <span style="color:#58a1dd">resources</span>: {}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">18</span><span>  - <span style="color:#58a1dd">args</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">19</span><span>    - <span style="color:#a6be9d">/bin/sh</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">20</span><span>    - -<span style="color:#a6be9d">c</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">21</span><span>    - <span style="color:#a6be9d">while true; do sleep 60; done;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">22</span><span>    <span style="color:#58a1dd">image</span>: <span style="color:#a6be9d">alpine:3.12.0</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">23</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">container2</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">24</span><span>    <span style="color:#58a1dd">resources</span>: {}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">25</span><span>  <span style="color:#58a1dd">dnsPolicy</span>: <span style="color:#a6be9d">ClusterFirst</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">26</span><span>  <span style="color:#58a1dd">restartPolicy</span>: <span style="color:#a6be9d">Never</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">27</span><span><span style="color:#58a1dd">status</span>: {}
+</span></span></code></pre></div>
+<ul>
+<li>Define a Volume of type emptyDir for the Pod. Container 1 should mount the Volume to path /etc/a, and container 2 should mount the Volume to path /etc/b.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">Pod</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span>  <span style="color:#58a1dd">creationTimestamp</span>: <span style="color:#ff636f">null</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>  <span style="color:#58a1dd">labels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span>    <span style="color:#58a1dd">run</span>: <span style="color:#a6be9d">alpine</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>  <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">alpine</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span>  <span style="color:#58a1dd">volumes</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>    - <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">shared-vol</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>      <span style="color:#58a1dd">emptyDir</span>: {}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>  <span style="color:#58a1dd">containers</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>  - <span style="color:#58a1dd">args</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">14</span><span>    - <span style="color:#a6be9d">/bin/sh</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">15</span><span>    - -<span style="color:#a6be9d">c</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">16</span><span>    - <span style="color:#a6be9d">while true; do sleep 60; done;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">17</span><span>    <span style="color:#58a1dd">image</span>: <span style="color:#a6be9d">alpine:3.12.0</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">18</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">container1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">19</span><span>    <span style="color:#58a1dd">volumeMounts</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">20</span><span>      - <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">shared-vol</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">21</span><span>        <span style="color:#58a1dd">mountPath</span>: <span style="color:#a6be9d">/etc/a</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">22</span><span>    <span style="color:#58a1dd">resources</span>: {}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">23</span><span>  - <span style="color:#58a1dd">args</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">24</span><span>    - <span style="color:#a6be9d">/bin/sh</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">25</span><span>    - -<span style="color:#a6be9d">c</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">26</span><span>    - <span style="color:#a6be9d">while true; do sleep 60; done;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">27</span><span>    <span style="color:#58a1dd">image</span>: <span style="color:#a6be9d">alpine:3.12.0</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">28</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">container2</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">29</span><span>    <span style="color:#58a1dd">volumeMounts</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">30</span><span>      - <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">shared-vol</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">31</span><span>        <span style="color:#58a1dd">mountPath</span>: <span style="color:#a6be9d">/etc/b</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">32</span><span>    <span style="color:#58a1dd">resources</span>: {}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">33</span><span>  <span style="color:#58a1dd">dnsPolicy</span>: <span style="color:#a6be9d">ClusterFirst</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">34</span><span>  <span style="color:#58a1dd">restartPolicy</span>: <span style="color:#a6be9d">Never</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">35</span><span><span style="color:#58a1dd">status</span>: {}
+</span></span></code></pre><ul>
+<li>Open an interactive shell for container 1 and create the directory data in the mount path. Navigate to the directory and create the file hello.txt with the contents “Hello World.” Exit out of the container.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k get pods
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k <span style="color:#58a1dd">exec</span> alpine -c container1 -it -- /bin/sh
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#58a1dd">cd</span> etc/a
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span>mkdir data
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span><span style="color:#58a1dd">cd</span> data
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">6</span><span><span style="color:#58a1dd">echo</span> <span style="color:#a6be9d">&#34;Hello World.&#34;</span> &gt; hello.txt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">7</span><span><span style="color:#58a1dd">exit</span>
+</span></span></code></pre><ul>
+<li>Open an interactive shell for container 2 and navigate to the directory /etc/b/data. Inspect the contents of file hello.txt. Exit out of the container.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k <span style="color:#58a1dd">exec</span> alpine -c container2 -it -- /bin/sh
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#58a1dd">cd</span> etc/b/data
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>cat hello.txt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#58a1dd">exit</span>
+</span></span></code></pre><ul>
+<li>Create a PersistentVolume named logs-pv that maps to the hostPath /var/logs. The access mode should be ReadWriteOnce and ReadOnlyMany. Provision a storage capacity of 5Gi. Ensure that the status of the PersistentVolume shows Available.</li>
+</ul>
+<div>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k explain PersistentVolume
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span><span style="color:#828b96;font-style:italic"># no &#34;kubectl create pv&#34; command :(</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>nano pv.yaml
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#828b96;font-style:italic"># pv.yaml</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">PersistentVolume</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>  <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">logs-pv</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>  <span style="color:#58a1dd">capacity</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>    <span style="color:#58a1dd">storage</span>: <span style="color:#a6be9d">5Gi</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span>  <span style="color:#58a1dd">accessModes</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>    - <span style="color:#a6be9d">ReadWriteOnce</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>    - <span style="color:#a6be9d">ReadOnlyMany</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>  <span style="color:#58a1dd">hostPath</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>    <span style="color:#58a1dd">path</span>: <span style="color:#a6be9d">/var/logs</span>
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k apply -f pv.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k get pv logs-pv
+</span></span></code></pre></div>
+<ul>
+<li>Create a PersistentVolumeClaim named logs-pvc. It uses ReadWriteOnce access. Request a capacity of 2Gi. Ensure that the status of the PersistentVolume shows Bound.</li>
+</ul>
+<div>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k explain PersistentVolumeClaim.spec
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>ke PersistentVolumeClaim.spec --recursive | grep -i -C <span style="color:#a6be9d">2</span> resources
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span>nano pvc.yaml
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#828b96;font-style:italic"># pvc.yaml</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">PersistentVolumeClaim</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>  <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">log-pvc</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>  <span style="color:#58a1dd">resources</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>    <span style="color:#58a1dd">requests</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span>      <span style="color:#58a1dd">storage</span>: <span style="color:#a6be9d">2Gi</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>  <span style="color:#58a1dd">accessModes</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>    - <span style="color:#a6be9d">ReadWriteOnce</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>  <span style="color:#58a1dd">storageClassName</span>: <span style="color:#a6be9d">&#34;&#34;</span>
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k apply -f pvc.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k get pvc
+</span></span></code></pre></div>
+<ul>
+<li>Mount the PersistentVolumeClaim in a Pod running the image nginx at the mount path /var/log/nginx.</li>
+</ul>
+<div>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k run nginx --image<span style="color:#ff636f">=</span>nginx:latest --dry-run<span style="color:#ff636f">=</span>client -o yaml &gt; pod.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k explain Pod.spec.volumes | grep -i persistent
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>k explain Pod.spec.volumes.persistentVolumeClaim
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span>nano pod.yaml
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 1</span><span><span style="color:#828b96;font-style:italic"># pod.yaml</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 2</span><span><span style="color:#58a1dd">apiVersion</span>: <span style="color:#a6be9d">v1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 3</span><span><span style="color:#58a1dd">kind</span>: <span style="color:#a6be9d">Pod</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 4</span><span><span style="color:#58a1dd">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 5</span><span>  <span style="color:#58a1dd">creationTimestamp</span>: <span style="color:#ff636f">null</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 6</span><span>  <span style="color:#58a1dd">labels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 7</span><span>    <span style="color:#58a1dd">run</span>: <span style="color:#a6be9d">nginx</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 8</span><span>  <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">nginx</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198"> 9</span><span><span style="color:#58a1dd">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">10</span><span>  <span style="color:#58a1dd">volumes</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">11</span><span>    - <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">logs-volume</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">12</span><span>      <span style="color:#58a1dd">persistentVolumeClaim</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">13</span><span>        <span style="color:#58a1dd">claimName</span>: <span style="color:#a6be9d">logs-pvc</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">14</span><span>  <span style="color:#58a1dd">containers</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">15</span><span>  - <span style="color:#58a1dd">image</span>: <span style="color:#a6be9d">nginx:1.25.1</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">16</span><span>    <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">nginx</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">17</span><span>    <span style="color:#58a1dd">resources</span>: {}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">18</span><span>    <span style="color:#58a1dd">volumeMounts</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">19</span><span>      - <span style="color:#58a1dd">name</span>: <span style="color:#a6be9d">logs-volume</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">20</span><span>        <span style="color:#58a1dd">mountPath</span>: <span style="color:#a6be9d">&#34;var/log/nginx&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">21</span><span>  <span style="color:#58a1dd">dnsPolicy</span>: <span style="color:#a6be9d">ClusterFirst</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">22</span><span>  <span style="color:#58a1dd">restartPolicy</span>: <span style="color:#a6be9d">Always</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">23</span><span><span style="color:#58a1dd">status</span>: {}
+</span></span></code></pre><pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k -f apply pod.yaml
+</span></span></code></pre></div>
+<ul>
+<li>Open an interactive shell to the container and create a new file named mynginx.log in /var/log/nginx. Exit out of the Pod.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k get pods
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k <span style="color:#58a1dd">exec</span> -it nginx -- /bin/sh
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span><span style="color:#58a1dd">cd</span> /var/log/nginx
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span>touch my-nginx.log
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span><span style="color:#58a1dd">exit</span>
+</span></span></code></pre><ul>
+<li>Delete the Pod and re-create it with the same YAML manifest. Open an interactive shell to the Pod, navigate to the directory /var/log/nginx, and find the file you created before.</li>
+</ul>
+<pre style="color:#1d2432;"><code><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">1</span><span>k delete pod nginx
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">2</span><span>k apply -f pod.yaml
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">3</span><span>k <span style="color:#58a1dd">exec</span> nginx -it -- /bin/sh
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">4</span><span><span style="color:#58a1dd">cd</span> /var/log/nginx
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">5</span><span>ls
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8e9198">6</span><span><span style="color:#58a1dd">exit</span>
+</span></span></code></pre><h2 id="chapter-8-multi-container-pods"><strong>Chapter 8, Multi-Container Pods</strong></h2>
 </div>
